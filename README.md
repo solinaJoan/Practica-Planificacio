@@ -3,7 +3,6 @@
 
 **Grup:** Anel Ademovich, Aleix Pitarch i Joan Solina  
 
----
 
 ## Objectius Aconseguits
 
