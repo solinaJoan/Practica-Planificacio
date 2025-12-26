@@ -75,10 +75,28 @@
         
         ;; === PESOS PER OPTIMITZACIÓ (Extensió 4) ===
         ;; Prioritat: reserves > habitacions > desperdici > orientació
-        (= (pes-reserves) 1000)
-        (= (pes-habitacions) 100)
-        (= (pes-desperdici) 10)
-        (= (pes-orientacio) 1)
+        ;; (= (pes-reserves) 1000)
+        ;; (= (pes-habitacions) 100)
+        ;; (= (pes-desperdici) 10)
+        ;; (= (pes-orientacio) 1)
+    )
+
+    ;; EXTENSIÓ 4: Funció a MINIMITZAR
+    ;; Combina tots els criteris amb els seus pesos
+    (:metric minimize 
+        (+ 
+            ;; Penalitzem NO assignar reserves (pes molt alt)
+            (* 1000 (- 3 (reserves-assignades)))
+
+            ;; Penalitzem obrir habitacions
+            (* 100 (habitacions-obertes-total))
+
+            ;; Penalitzem desperdici de places
+            ;; (* 10 (desperdici-total))
+
+            ;; Bonifiquem orientacions correctes
+            ;; (* 1 (- 3 (orientacions-correctes)))
+        )
     )
     
     (:goal (and
@@ -89,21 +107,8 @@
         
         ;; EXTENSIÓ 1+: No cal especificar goal, optimitzem la métrica
         (>= (reserves-assignades) 0)
-    ))
+        )
+    )
     
-    ;; EXTENSIÓ 4: Funció a MINIMITZAR
-    ;; Combina tots els criteris amb els seus pesos
-    (:metric minimize (+ 
-        ;; Penalitzem NO assignar reserves (pes més alt)
-        (* (pes-reserves) (- 3 (reserves-assignades)))
-        
-        ;; Penalitzem obrir habitacions (pes alt)
-        (* (pes-habitacions) (habitacions-obertes-total))
-        
-        ;; Penalitzem desperdici de places (pes mitjà)
-        (* (pes-desperdici) (desperdici-total))
-        
-        ;; Bonifiquem orientacions correctes (pes baix)
-        (* (pes-orientacio) (- 3 (orientacions-correctes)))
-    ))
+    
 )
