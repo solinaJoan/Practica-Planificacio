@@ -8,61 +8,28 @@
 
 ### Extensions Implementades
 
-- ✅ **Nivell Bàsic**: Assignació sense solapaments
-- ✅ **Extensió 1**: Optimització de reserves assignades
-- ✅ **Extensió 2**: Preferències d'orientació
-- ✅ **Extensió 3**: Minimització del desperdici de places
-- ✅ **Extensió 4**: Optimització d'habitacions obertes
+- **Nivell Bàsic**: Assignació sense solapaments
+- **Extensió 1**: Optimització de reserves assignades
+- **Extensió 2**: Preferències d'orientació
+- **Extensió 3**: Minimització del desperdici de places
+- **Extensió 4**: Optimització d'habitacions obertes
 
 ### Punts Extra
 
-- ✅ **+1 punt**: Generador automàtic de problemes aleatoris
-- ✅ **+1 punt**: Experimentació amb temps d'execució creixent
-
-
----
-
-## Instal·lació i Execució
-
-### Prerequisits
-
-1. **Metric-FF** (planificador PDDL)
-   ```bash
-   # Descarregar i compilar
-   wget http://fai.cs.uni-saarland.de/hoffmann/metric-ff.html
-   tar -xzf Metric-FF-v2.1.tgz
-   cd Metric-FF-v2.1
-   make
-   sudo cp ff /usr/local/bin/metric-ff
-   ```
-
-2. **Python 3.6+** (per al generador)
-   ```bash
-   python3 --version
-   ```
-
-### Execució Ràpida
-
-```bash
-# Executar problema bàsic
-metric-ff -o domain.pddl -f problem-basic.pddl
-
-# Executar problema complex
-metric-ff -o domain.pddl -f problem-complex.pddl
-
-# Generar problemes aleatoris
-python3 generator.py --suite
-
-# Executar tots els experiments
-chmod +x run_experiments.sh
-./run_experiments.sh
-
-```
+- Generador automàtic de problemes aleatoris
+- Experimentació amb temps d'execució creixent
 
 ---
-## Generador de Problemes
 
-### Ús Bàsic
+## Execució
+
+1. **Planificador PDDL**
+   ```bash
+   # Executar
+   ./run_planificador.sh
+   ```
+
+2. **Generador de problemes** 
 
 ```bash
 # Generar un problema personalitzat
@@ -80,7 +47,7 @@ python3 generator.py --suite
 - `-o, --output`: Fitxer de sortida
 - `-s, --seed`: Llavor aleatòria per reproducibilitat
 - `--suite`: Genera múltiples problemes de mida creixent
-
+<!-- 
 ### Suite de Proves Generada
 
 | Fitxer | Habitacions | Reserves | Dies |
@@ -160,4 +127,4 @@ Temps d'execució: 0.456s
 Solució trobada: SÍ
 Longitud del pla: 6 accions
 ```
-
+ -->
