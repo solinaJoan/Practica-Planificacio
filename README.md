@@ -17,47 +17,55 @@
 ### Punts Extra
 
 - Generador automàtic de problemes aleatoris
-- Experimentació amb temps d'execució creixent
+- Experimentació amb problemes de mida creixent
 
----
 
 ## Execució
 
 1. **Planificador PDDL**
-   ```bash
+Per executar les diferents extensions i problemes que hem creat, hem fet un script que et demana quina extensió volem executar.
+
+```bash
    # Executar
    ./run_planificador.sh
-   ```
+```
 
 2. **Generador de problemes** 
+El generador de problemes crea diferents problemes per les diferents extensions. Pot modificar el nombre d'habitacions, el nombre de reserves... S'executa de la seguent manera.
 
 ```bash
 # Generar un problema personalitzat
 python3 generator.py -H 5 -r 10 -d 30 -o problem-custom.pddl
+```
+Crea els problemes a la carpeta test/problemes.
 
+Per fer l'experimentació, hem generat diferents problemes de mida creixent. Per reproduir l'experimentació, hem d'executar:
+```bash
 # Generar suite completa de proves
 python3 generator.py --suite
 ```
+I ens generarà 5 fitxers amb diferents mides a test/experimentacio
 
 ### Paràmetres
-
 - `-H, --habitacions`: Nombre d'habitacions (default: 5)
 - `-r, --reserves`: Nombre de reserves (default: 8)
 - `-d, --dies`: Dies del mes (màxim: 30)
-- `-o, --output`: Fitxer de sortida
+- `-o, --output`: Fitxer de sortida. Si no l'especifiquem el fitxer de sortida és XXX_problem.pddl, on XXX és el valor de l'extensió a la que creem el problema
 - `-s, --seed`: Llavor aleatòria per reproducibilitat
 - `--suite`: Genera múltiples problemes de mida creixent
-<!-- 
+
 ### Suite de Proves Generada
 
-| Fitxer | Habitacions | Reserves | Dies |
-|--------|-------------|----------|------|
-| problem-petit.pddl | 3 | 3 | 10 |
-| problem-mitja.pddl | 4 | 6 | 15 |
-| problem-gran.pddl | 6 | 10 | 20 |
-| problem-molt-gran.pddl | 8 | 15 | 25 |
-| problem-extrem.pddl | 10 | 20 | 30 |
+| Fitxer           | Habitacions | Reserves | Dies |
+|---------------- -|-------------|----------|------|
+| problem_1.pddl   | 3           | 3        | 10   |
+| problem_2.pddl   | 4           | 6        | 15   |
+| problem_3_.pddl  | 6           | 10       | 20   |
+| problem_4_.pddl  | 8           | 15       | 25   |
+| problem_5_.pddl  | 10          | 20       | 30   |
 
+
+<!-- 
 ---
 
 ## Jocs de Prova

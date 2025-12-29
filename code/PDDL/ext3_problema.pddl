@@ -35,14 +35,14 @@
     (dia-reserva res1 d5)
     
     ;; Reserva 2: 2 persones, dies 10-15
-    ;; (= (num-persones res2) 2)
-    ;; (pendent res2)
-    ;; (dia-reserva res2 d10)
-    ;; (dia-reserva res2 d11)
-    ;; (dia-reserva res2 d12)
-    ;; (dia-reserva res2 d13)
-    ;; (dia-reserva res2 d14)
-    ;; (dia-reserva res2 d15)
+    (= (num-persones res2) 2)
+    (pendent res2)
+    (dia-reserva res2 d10)
+    (dia-reserva res2 d11)
+    (dia-reserva res2 d12)
+    (dia-reserva res2 d13)
+    (dia-reserva res2 d14)
+    (dia-reserva res2 d15)
     
     ;; Reserva 3: 1 persona, dies 3-7
     (= (num-persones res3) 3)
@@ -62,8 +62,8 @@
   ;; Minimitzar el cost 
   (:metric minimize 
     (+ 
-      (* 1 (places-lliures))
-      (* 1 (reserves-assignades))
+      (places-lliures)
+      (* 100 (reserves-assignades))
     )
   )
 )

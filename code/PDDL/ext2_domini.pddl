@@ -74,7 +74,7 @@
     :effect (and
       ;; No marquem com servida, simplement la treiem de pendents
       (not (pendent ?r))
-      (increase (reserves-assignades) 5)
+      (increase (reserves-assignades) 1)
     )
   )
 )

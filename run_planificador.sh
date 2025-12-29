@@ -6,21 +6,21 @@ PLANNER="./code/metricff.exe"
 
 # Extensions disponibles
 echo "Quina extensió vols executar?"
-echo "  1) nivell_basic"
-echo "  2) ext1"
-echo "  3) ext2"
-echo "  4) ext3"
-echo "  5) ext4"
+echo "  1) Extensió 1"
+echo "  2) Extensió 2"
+echo "  3) Extensió 3"
+echo "  4) Extensió 4"
+echo "  5) Nivell Bàsic"
 echo
 
 read -p "Introdueix una opció (1-5): " opcio
 
 case $opcio in
-  1) EXT="nivell_basic" ;;
-  2) EXT="Extensió 1" ;;
-  3) EXT="Extensió 2" ;;
-  4) EXT="Extensió 3" ;;
-  5) EXT="Extensió 4" ;;
+  1) EXT="ext1" ;;
+  2) EXT="ext2" ;;
+  3) EXT="ext3" ;;
+  4) EXT="ext4" ;;
+  5) EXT="nivell_basic" ;;
   *)
     echo "Opció no vàlida."
     exit 1

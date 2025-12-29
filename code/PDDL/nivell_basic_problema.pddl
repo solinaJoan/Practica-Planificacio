@@ -15,7 +15,7 @@
   )
   
   (:init
-    ;; capacitates de las habitaciones
+    ;; === HABITACIONS ===
     (= (capacitat hab1) 2)  ; Habitació 1: hasta 2 persones
     (= (capacitat hab2) 3)  ; Habitació 2: hasta 3 persones
     (= (capacitat hab3) 4)  ; Habitació 3: hasta 4 persones

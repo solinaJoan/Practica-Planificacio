@@ -66,9 +66,15 @@
   
   
   (:goal
-    (forall (?r - reserva) (servida ?r))
+    ;; Totes les reserves han estat processades
+    (forall (?r - reserva) (not (pendent ?r)))
   )
 
   ;; Optimització de paràmetres
-  (:metric minimize (+ (orientacions-incorrectes) (reserves-assignades)))
+  (:metric minimize 
+    (+ 
+      (orientacions-incorrectes) 
+      (* 100 (reserves-assignades))
+    )
+  )
 )

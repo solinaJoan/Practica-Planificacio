@@ -61,7 +61,7 @@ run_problem() {
     echo "Temps d'execució: ${ELAPSED}s" >> $RESULTS_FILE
     
     if [ $SOLUTION_FOUND -gt 0 ]; then
-        echo -e "${GREEN}✓ Solució trobada en ${ELAPSED}s (${PLAN_LENGTH} accions)${NC}"
+        echo -e "${GREEN} Solució trobada en ${ELAPSED}s (${PLAN_LENGTH} accions)${NC}"
         echo "Solució trobada: SÍ" >> $RESULTS_FILE
         echo "Longitud del pla: $PLAN_LENGTH accions" >> $RESULTS_FILE
     else
@@ -110,7 +110,7 @@ done
 
 # Resum final
 echo -e "\n${BLUE}======================================${NC}"
-echo -e "${GREEN}✓ Experiments completats!${NC}"
+echo -e "${GREEN} Experiments completats!${NC}"
 echo -e "${BLUE}======================================${NC}"
 echo -e "\nResultats guardats a: ${GREEN}${RESULTS_FILE}${NC}"
 echo -e "Traces individuals a: ${GREEN}results/*_output.txt${NC}\n"
