@@ -213,11 +213,11 @@ def generar_suite_proves():
     generator = ReservaGenerator(seed=42, extensio=4)
     
     configs = [
-        (3, 3, 30, "./test/experiments/problem_1.pddl"),
-        (4, 6, 30, "./test/experiments/problem_2.pddl"),
-        (6, 10, 30, "./test/experiments/problem_3.pddl"),
-        (8, 15, 30, "./test/experiments/problem_4.pddl"),
-        (10, 20, 30, "./test/experiments/problem_5.pddl"),
+        (3, 4, 30, "./test/experiments/problems/problem_1.pddl"),
+        (4, 5, 30, "./test/experiments/problems/problem_2.pddl"),
+        (5, 6, 30, "./test/experiments/problems/problem_3.pddl"),
+        (6, 7, 30, "./test/experiments/problems/problem_4.pddl"),
+        (7, 8, 30, "./test/experiments/problems/problem_5.pddl"),
     ]
     
     print("\n=== Generant suite de proves ===\n")
@@ -262,7 +262,7 @@ def main():
             args.habitacions, 
             args.reserves, 
             30,
-            str(f"test/problems/{args.output}")
+            str(f"./test/{args.output}")
         )
 
 

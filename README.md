@@ -23,7 +23,7 @@
 ## Execució
 
 1. **Planificador PDDL**
-Per executar les diferents extensions i problemes que hem creat, hem fet un script que et demana quina extensió volem executar.
+Per executar les diferents extensions i problemes que hem creat, hem fet un script que et demana quina extensió volem executar. Podem decidir entre executar les diverses extensions fetes. Fa servir els codis per defecte, els de la carpeta code/PPDL/
 
 ```bash
    # Executar
@@ -35,21 +35,20 @@ El generador de problemes crea diferents problemes per les diferents extensions.
 
 ```bash
 # Generar un problema personalitzat
-python3 generator.py -H 5 -r 10 -d 30 -o problem-custom.pddl
+python3 ./test/problem_generator.py -H 5 -r 10 -d 30 -o problem-custom.pddl
 ```
 Crea els problemes a la carpeta test/problemes.
 
 Per fer l'experimentació, hem generat diferents problemes de mida creixent. Per reproduir l'experimentació, hem d'executar:
 ```bash
 # Generar suite completa de proves
-python3 generator.py --suite
+python3 ./test/problem_generator.py --suite
 ```
-I ens generarà 5 fitxers amb diferents mides a test/experimentacio
+I ens generarà 5 fitxers amb diferents mides a test/experimentacio.
 
-### Paràmetres
+### Paràmetres del generador de problemes
 - `-H, --habitacions`: Nombre d'habitacions (default: 5)
 - `-r, --reserves`: Nombre de reserves (default: 8)
-- `-d, --dies`: Dies del mes (màxim: 30)
 - `-o, --output`: Fitxer de sortida. Si no l'especifiquem el fitxer de sortida és XXX_problem.pddl, on XXX és el valor de l'extensió a la que creem el problema
 - `-s, --seed`: Llavor aleatòria per reproducibilitat
 - `--suite`: Genera múltiples problemes de mida creixent
@@ -58,12 +57,20 @@ I ens generarà 5 fitxers amb diferents mides a test/experimentacio
 
 | Fitxer           | Habitacions | Reserves | Dies |
 |---------------- -|-------------|----------|------|
-| problem_1.pddl   | 3           | 3        | 10   |
-| problem_2.pddl   | 4           | 6        | 15   |
-| problem_3_.pddl  | 6           | 10       | 20   |
-| problem_4_.pddl  | 8           | 15       | 25   |
+| problem_1.pddl   | 3           | 3        | 30   |
+| problem_2.pddl   | 4           | 6        | 30   |
+| problem_3_.pddl  | 6           | 10       | 30   |
+| problem_4_.pddl  | 8           | 15       | 30   |
 | problem_5_.pddl  | 10          | 20       | 30   |
 
+
+2. **Experimentació** 
+Finalment, hem fet un script que genera problemes de mida creixent fent servir el generador de problemes que hem creat, i emmagatzema els respectius temps d'execució. Per executar-lo, hem de fer:
+```bash
+   # Executar
+   ./run_experiments.sh
+```
+Aquest script crearà una carpeta a test/experiments/results/ amb els resultats de l'experimentació
 
 <!-- 
 ---

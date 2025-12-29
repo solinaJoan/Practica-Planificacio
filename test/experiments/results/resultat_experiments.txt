@@ -1,0 +1,21 @@
+======================================
+  RESULTATS EXPERIMENTS METRIC-FF
+  Domini: Extensió 4
+  Data: Mon Dec 29 17:41:58     2025
+======================================
+
+Solution found: yes
+Problem name: HOTEL-GENERATED-3H-4R
+Total time (s): 0.16
+Plan:
+
+Solution found: yes
+Problem name: HOTEL-GENERATED-4H-5R
+Total time (s): 0.15
+Plan:
+
+Solution found: yes
+Problem name: HOTEL-GENERATED-5H-6R
+Total time (s): 0.15
+Plan:
+

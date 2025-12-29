@@ -1,4 +1,4 @@
-(define (problem hotel-generated-3h-3r)
+(define (problem hotel-generated-3h-4r)
   (:domain hotel-reserves)
 
   (:objects
@@ -6,7 +6,7 @@
     h1 h2 h3 - habitacio
 
     ;; Reserves a processar
-    r1 r2 r3 - reserva
+    r1 r2 r3 r4 - reserva
 
     ;; Dies del mes (1 al 30) 
     d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 d16 d17 d18 d19 d20 d21 d22 d23 d24 d25 d26 d27 d28 d29 d30 - dia
@@ -38,6 +38,11 @@
     (= (num-persones r3) 2)
     (pendent r3)
     (dia-reserva r3 d17) (dia-reserva r3 d18) (dia-reserva r3 d19) (dia-reserva r3 d20)
+
+    ;; Reserva r4: 2 persones, dies 18-29
+    (= (num-persones r4) 2)
+    (pendent r4)
+    (dia-reserva r4 d18) (dia-reserva r4 d19) (dia-reserva r4 d20) (dia-reserva r4 d21) (dia-reserva r4 d22) (dia-reserva r4 d23) (dia-reserva r4 d24) (dia-reserva r4 d25) (dia-reserva r4 d26) (dia-reserva r4 d27) (dia-reserva r4 d28) (dia-reserva r4 d29)
 
   )
 
