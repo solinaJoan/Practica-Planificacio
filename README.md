@@ -46,17 +46,16 @@ python3 ./test/problem_generator.py --suite
 ```
 I ens generarà 5 fitxers amb diferents mides a test/experimentacio.
 
-### Paràmetres del generador de problemes
+**Paràmetres del generador de problemes**
 - `-H, --habitacions`: Nombre d'habitacions (default: 5)
 - `-r, --reserves`: Nombre de reserves (default: 8)
 - `-o, --output`: Fitxer de sortida. Si no l'especifiquem el fitxer de sortida és XXX_problem.pddl, on XXX és el valor de l'extensió a la que creem el problema
 - `-s, --seed`: Llavor aleatòria per reproducibilitat
 - `--suite`: Genera múltiples problemes de mida creixent
 
-### Suite de Proves Generada
-
+**Suite de Proves Generada**
 | Fitxer           | Habitacions | Reserves | Dies |
-|---------------- -|-------------|----------|------|
+|------------------|-------------|----------|------|
 | problem_1.pddl   | 3           | 3        | 30   |
 | problem_2.pddl   | 4           | 6        | 30   |
 | problem_3_.pddl  | 6           | 10       | 30   |

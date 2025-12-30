@@ -40,7 +40,7 @@ time spent:    0.00 seconds instantiating 6 easy, 12 hard action templates
                0.00 seconds reachability analysis, yielding 240 facts and 18 actions
                0.00 seconds creating final representation with 140 relevant facts, 3 relevant fluents
                0.00 seconds computing LNF
-               0.15 seconds building connectivity graph
+               0.00 seconds building connectivity graph
                0.00 seconds searching, evaluating 614 states, to a max depth of 0
-               0.15 seconds total time
+               0.00 seconds total time
 

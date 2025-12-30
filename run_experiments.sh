@@ -92,20 +92,25 @@ run_problem() {
 
     # 4. Assignacions (plan)
     PLAN=$(awk '
-    /ff: found legal plan/ {found=1; next}
-    found && /step/ {print; next}
-    found && /^[[:space:]]+[0-9]+:/ {print}
-    found && NF==0 {exit}
+    /^step[[:space:]]+[0-9]+:/ {inplan=1}
+    inplan && (/^[[:space:]]+[0-9]+:/ || /^step[[:space:]]+[0-9]+:/) {print}
+    inplan && !(/^[[:space:]]+[0-9]+:/ || /^step[[:space:]]+[0-9]+:/) && NR>1 {exit}
     ' "$TEMP_OUTPUT")
+    echo "$PLAN"
 
     # Extreure H i R del nom del problema
     HAB=$(echo "$PROBLEM_NAME" | sed -n 's/.*-\([0-9]\+\)H-.*/\1/p')
     RES=$(echo "$PROBLEM_NAME" | sed -n 's/.*-[0-9]\+H-\([0-9]\+\)R/\1/p')
+    NUM_FACTS=$(grep "yielding" "$TEMP_OUTPUT" | awk '{print $6}')
+    NUM_STATES=$(grep "evaluating" "$TEMP_OUTPUT" | awk '{print $5}')
+
 
     # Resultat
     {
         echo "Solution found: $SOLUTION_FOUND"
         echo "Problem name: $PROBLEM_NAME"
+        echo "Nombre de dades: $NUM_FACTS"
+        echo "Nombre d'estats: $NUM_STATES"
         echo "Total time (s): $TOTAL_TIME"
         echo "Plan:"
         echo "$PLAN"

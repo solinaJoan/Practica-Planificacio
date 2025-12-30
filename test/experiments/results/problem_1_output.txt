@@ -32,11 +32,11 @@ step    0: DESCARTAR-RESERVA R2
         3: ASSIGNAR-RESERVA R1 H1
      
 
-time spent:    0.16 seconds instantiating 4 easy, 7 hard action templates
+time spent:    0.00 seconds instantiating 4 easy, 7 hard action templates
                0.00 seconds reachability analysis, yielding 151 facts and 11 actions
                0.00 seconds creating final representation with 98 relevant facts, 3 relevant fluents
                0.00 seconds computing LNF
                0.00 seconds building connectivity graph
                0.00 seconds searching, evaluating 54 states, to a max depth of 0
-               0.16 seconds total time
+               0.00 seconds total time
 
