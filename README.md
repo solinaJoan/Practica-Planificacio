@@ -90,28 +90,28 @@ Finalment, hem fet un script que genera problemes de mida creixent fent servir e
 
 1. Generar problemes de mida creixent, aprofitant el mode `--suite` del generador de problemes
 2. Executar metricff per cada problema
-3. Mesurar temps d'execució i mida del problema 
+3. Mesurar temps d'execució, mida del problema i altres variables
 4. Analitzar creixement de complexitat
 
 ### Experiments
 
 Hem dut a terme tres experiments, els resultats dels quals es troben a les respectives carpetes.
 
-**Experiment 1**
+#### **Experiment 1**
 El primer experiment està enfocat en veure com evolucions el temps respecte un problema en el que creixen el nombre d'habitacions.
 L'hem fet amb la configuració següent: 
 - 9 mostres
 - Habitacions creixents, de 4 a 12
 - Reserves constants, 4
 
-**Experiment 2**
+#### **Experiment 2**
 El segon experiment està enfocat en veure com evolucions el temps respecte un problema en el que creixen el nombre de reserves.
 L'hem fet amb la configuració següent: 
 - 9 mostres
 - Habitacions constants, 4
 - Reserves creixents, de 4 a 12
 
-**Experiment 3**
+#### **Experiment 3**
 Hem fet el tercer experiment per veure com evoluciona el temps respecte un problema creixent tant en nombre d'habitacions com en nombre de reserves.
 L'hem fet amb la configuració següent: 
 - Habitacions creixents, de 3 a 7
