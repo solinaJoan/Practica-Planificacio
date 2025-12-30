@@ -50,8 +50,6 @@ mkdir -p "$RESULTS_DIR"
 RESULTS_FILE="${RESULTS_DIR}/resultat_experiments.txt"
 TABLE_FILE="${RESULTS_DIR}/taula_resum.csv"
 
-echo -e "Els resultats es guardaran a: ${RESULTS_FILE}\n"
-
 # Capçalera del fitxer
 {
 echo "======================================"
@@ -63,7 +61,7 @@ echo ""
 } > "$RESULTS_FILE"
 
 # Capçalera taula CSV
-echo "Problema,Habitacions,Reserves,Temps (s),Longitud pla" > "$TABLE_FILE"
+echo "Problema,N_Estats,N_Fets,N_Habitacions,N_Reserves,Temps (s)" > "$TABLE_FILE"
 
 # Funció per executar un problema
 run_problem() {
@@ -111,8 +109,8 @@ run_problem() {
         echo "Nom del problema: $PROBLEM_NAME"
         echo "Nombre d'habitacions: $HAB"
         echo "Nombre de reserves: $RES"
+        echo "Nombre d'estats: $NUM_STATES"
         echo "Nombre de fets (facts): $NUM_FACTS"
-        echo "Nombre d'estats creats: $NUM_STATES"
         echo "Temps total(s): $TOTAL_TIME"
         echo "Plan:"
         echo "$PLAN"
@@ -120,9 +118,10 @@ run_problem() {
     } >> "$RESULTS_FILE"
 
     # Afegir fila a la taula CSV
-    echo "$problem_name,$HAB,$RES,$TOTAL_TIME,$PLAN_LENGTH" >> "$TABLE_FILE"
+    NUM_PROBLEM="${problem_name: -1}"
+    echo "$NUM_PROBLEM,$NUM_STATES,$NUM_FACTS,$HAB,$RES,$TOTAL_TIME" >> "$TABLE_FILE"
 
-    echo -e "Solució trobada: ${TOTAL_TIME}s (${PLAN_LENGTH} accions)"
+    echo -e "Solució trobada: ${TOTAL_TIME}s"
 }
 
 # ===============================
@@ -131,13 +130,13 @@ run_problem() {
 
 echo -e "\n=== Executant problemes d'experimentació ===\n"
 
-for i in {1..5}; do
-    PROBLEM_FILE="${PROBLEMS_DIR}/problem_${i}.pddl"
+for PROBLEM_FILE in "$PROBLEMS_DIR"/problem_*.pddl; do
     if [ -f "$PROBLEM_FILE" ]; then
         run_problem "$PROBLEM_FILE"
         sleep 1
     else
-        echo -e "${RED}No s'ha trobat ${PROBLEM_FILE}"
+        echo -e "${RED}No s'han trobat fitxers problem_*.pddl a ${PROBLEMS_DIR}"
+        break
     fi
 done
 

@@ -1,0 +1,83 @@
+======================================
+  RESULTATS EXPERIMENTS METRIC-FF
+  Domini: Extensió 4
+  Data: Tue Dec 30 12:32:08     2025
+======================================
+
+Solution found: yes
+Problem name: HOTEL-GENERATED-3H-4R
+Nombre d'habitacions: 3
+Nombre de reserves: 4
+Nombre d'estats: 54
+Nombre de fets (facts): 151
+Total time (s): 0.00
+Plan:
+step    0: DESCARTAR-RESERVA R2
+        1: ASSIGNAR-RESERVA R3 H2
+        2: ASSIGNAR-RESERVA R4 H3
+        3: ASSIGNAR-RESERVA R1 H1
+
+Solution found: yes
+Problem name: HOTEL-GENERATED-4H-5R
+Nombre d'habitacions: 4
+Nombre de reserves: 5
+Nombre d'estats: 408
+Nombre de fets (facts): 222
+Total time (s): 0.16
+Plan:
+step    0: DESCARTAR-RESERVA R5
+        1: ASSIGNAR-RESERVA R2 H1
+        2: ASSIGNAR-RESERVA R4 H1
+        3: ASSIGNAR-RESERVA R1 H3
+        4: ASSIGNAR-RESERVA R3 H2
+     
+
+Solution found: yes
+Problem name: HOTEL-GENERATED-5H-6R
+Nombre d'habitacions: 5
+Nombre de reserves: 6
+Nombre d'estats: 614
+Nombre de fets (facts): 240
+Total time (s): 0.00
+Plan:
+step    0: DESCARTAR-RESERVA R5
+        1: ASSIGNAR-RESERVA R1 H1
+        2: ASSIGNAR-RESERVA R3 H1
+        3: ASSIGNAR-RESERVA R4 H1
+        4: ASSIGNAR-RESERVA R2 H3
+        5: ASSIGNAR-RESERVA R6 H3
+     
+
+Solution found: yes
+Problem name: HOTEL-GENERATED-6H-7R
+Nombre d'habitacions: 6
+Nombre de reserves: 7
+Nombre d'estats: 54880
+Nombre de fets (facts): 386
+Total time (s): 670.31
+Plan:
+step    0: ASSIGNAR-RESERVA R3 H4
+        1: ASSIGNAR-RESERVA R5 H4
+        2: ASSIGNAR-RESERVA R7 H5
+        3: ASSIGNAR-RESERVA R2 H5
+        4: ASSIGNAR-RESERVA R6 H3
+        5: ASSIGNAR-RESERVA R1 H3
+        6: ASSIGNAR-RESERVA R4 H6
+     
+Solution found: yes
+Problem name: HOTEL-GENERATED-7H-8R
+Nombre d'habitacions: 7
+Nombre de reserves: 8
+Nombre d'estats: 375683
+Nombre de fets (facts): 442
+Total time (s): 46820.47
+Plan:
+step    0: ASSIGNAR-RESERVA R2 H1
+        1: ASSIGNAR-RESERVA R7 H1
+        2: ASSIGNAR-RESERVA R6 H7
+        3: ASSIGNAR-RESERVA R8 H7
+        4: ASSIGNAR-RESERVA R1 H5
+        5: ASSIGNAR-RESERVA R4 H5
+        6: ASSIGNAR-RESERVA R3 H4
+        7: ASSIGNAR-RESERVA R5 H2
+     

@@ -20,31 +20,45 @@
 - Experimentació amb problemes de mida creixent
 
 
-## Execució
+<!-- ## Execució -->
 
-1. **Planificador PDDL**
-Per executar les diferents extensions i problemes que hem creat, hem fet un script que et demana quina extensió volem executar. Podem decidir entre executar les diverses extensions fetes. Fa servir els codis per defecte, els de la carpeta code/PPDL/
+## Planificador bàsic
+La primera part de la pràctica és troba a code/PDDL. És el codi bàsic que hem fet servir per desenvolupar la pràctica. Conté tant el domini com el problema de les quatre extensions i el nivell bàsic El problema és constant i molt bàsic. L'explicarem amb més detall a l'apartat dels jocs de prova. 
+
+Per executar les diferents extensions i problemes que hem creat, hem fet un script. Et fa decidir entre les diverses extensions que hem fet.
 
 ```bash
 # Executar
 ./run_planificador.sh
 ```
 
-2. **Generador de problemes** 
-El generador de problemes crea diferents problemes per les diferents extensions. Pot modificar el nombre d'habitacions, el nombre de reserves... S'executa de la seguent manera.
+## Jocs de Prova 
+
+Hem fet servir diversos jocs de prova. Per desenvolupar la pràctica hem fet servir els jocs de prova per defecte, a la carpeta de code/PDDL. Tots tenen la mateixa configuració. 
+
+**Configuració:**
+- 3 habitacions (capacitats: 2, 3, 4)
+- 3 reserves 
+   - 2 persones dies 1-5, 
+   - 3 persones, dies 10-15
+   - 1 persona, dies 3-7
+
+Per l'experimentació en canvi, hem fet servir el generador de jocs de prova amb configuracions diferents a cada experiment.
+Hem creat un programa `problem_generator.py` per crear diferents jocs de prova per les diferents extensions. Pot modificar el nombre d'habitacions, el nombre de reserves... S'executa de la seguent manera.
 
 ```bash
 # Generar un problema personalitzat
 python3 ./test/problem_generator.py -H 5 -r 10 -d 30 -o problem-custom.pddl
 ```
-Crea els problemes a la carpeta test/problemes.
 
-Per fer l'experimentació, hem generat diferents problemes de mida creixent. Per reproduir l'experimentació, hem d'executar:
+Per fer l'experimentació, hem creat un mode d'execució per generar diversos problemes a la vegada de mida creixent. S'executa de la seguent manera
+
 ```bash
 # Generar suite completa de proves
 python3 ./test/problem_generator.py --suite
 ```
-I ens generarà 5 fitxers amb diferents mides a test/experimentacio.
+
+Crea els problemes a la carpeta test/experiments/problemes. Si els creem amb mode `--suite`, els genera amb nom problema_x.pddl i si els creem manualment, posa el nom de l'extensió per la qual volem generar un problema (per defecte nivell_basic). 
 
 **Paràmetres del generador de problemes**
 - `-H, --habitacions`: Nombre d'habitacions (default: 5)
@@ -58,44 +72,50 @@ I ens generarà 5 fitxers amb diferents mides a test/experimentacio.
 |------------------|-------------|----------|------|
 | problem_1.pddl   | 3           | 3        | 30   |
 | problem_2.pddl   | 4           | 6        | 30   |
-| problem_3_.pddl  | 6           | 10       | 30   |
+| problem_3_.pddl  | 5           | 10       | 30   |
 | problem_4_.pddl  | 8           | 15       | 30   |
 | problem_5_.pddl  | 10          | 20       | 30   |
 
 
-2. **Experimentació** 
-Finalment, hem fet un script que genera problemes de mida creixent fent servir el generador de problemes que hem creat, i emmagatzema els respectius temps d'execució. Per executar-lo, hem de fer:
+## Experimentació i resultats
+
+Finalment, hem fet un script que genera problemes de mida creixent fent servir el generador de problemes que hem creat, i emmagatzema els respectius temps d'execució i altres dades rellevants. Per executar-lo, hem d'executar:
+
 ```bash
 # Executar
 ./run_experiments.sh
 ```
-Aquest script crearà una carpeta a test/experiments/results/ amb els resultats de l'experimentació
-
----
-
-## Jocs de Prova
-
-Hem fet servir diversos jocs de prova. Per desenvolupar la pràctica hem fet servir els jocs de prova per defecte, a la carpeta de code/PDDL. Tots els jocs de prova per defecte tenen la mateixa configuració. 
-
-**Configuració:**
-- 3 habitacions (capacitats: 2, 3, 4)
-- 3 reserves 
-   - 2 persones dies 1-5, 
-   - 3 persones, dies 10-15
-   - 1 persona, dies 3-7
-
-Per l'experimentació en canvi, hem fet servir el generador de jocs de prova amb configuraacions diferents a cada experiment.
-
----
-
-## Experiments i Resultats
 
 ### Metodologia
 
-1. Generar problemes de mida creixent
+1. Generar problemes de mida creixent, aprofitant el mode `--suite` del generador de problemes
 2. Executar metricff per cada problema
 3. Mesurar temps d'execució i mida del problema 
 4. Analitzar creixement de complexitat
+
+### Experiments
+
+Hem dut a terme tres experiments, els resultats dels quals es troben a les respectives carpetes.
+
+**Experiment 1**
+El primer experiment està enfocat en veure com evolucions el temps respecte un problema en el que creixen el nombre d'habitacions.
+L'hem fet amb la configuració següent: 
+- 9 mostres
+- Habitacions creixents, de 4 a 12
+- Reserves constants, 4
+
+**Experiment 2**
+El segon experiment està enfocat en veure com evolucions el temps respecte un problema en el que creixen el nombre de reserves.
+L'hem fet amb la configuració següent: 
+- 9 mostres
+- Habitacions constants, 4
+- Reserves creixents, de 4 a 12
+
+**Experiment 3**
+Hem fet el tercer experiment per veure com evoluciona el temps respecte un problema creixent tant en nombre d'habitacions com en nombre de reserves.
+L'hem fet amb la configuració següent: 
+- Habitacions creixents, de 3 a 7
+- Reserves creixents, de 4 a 8
 
 ### Anàlisi de Resultats
 
@@ -121,4 +141,8 @@ step    0: DESCARTAR-RESERVA R5
         4: ASSIGNAR-RESERVA R2 H3
         5: ASSIGNAR-RESERVA R6 H3
 ```
+
+
+
+
 
