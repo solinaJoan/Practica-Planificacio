@@ -77,7 +77,7 @@ run_problem() {
 
     # Comprovar solució
     if grep -q "ff: found legal plan" "$TEMP_OUTPUT"; then
-        SOLUTION_FOUND="yes"
+        SOLUTION_FOUND="si"
     else
         SOLUTION_FOUND="no"
     fi
@@ -96,7 +96,7 @@ run_problem() {
     inplan && (/^[[:space:]]+[0-9]+:/ || /^step[[:space:]]+[0-9]+:/) {print}
     inplan && !(/^[[:space:]]+[0-9]+:/ || /^step[[:space:]]+[0-9]+:/) && NR>1 {exit}
     ' "$TEMP_OUTPUT")
-    echo "$PLAN"
+
 
     # Extreure H i R del nom del problema
     HAB=$(echo "$PROBLEM_NAME" | sed -n 's/.*-\([0-9]\+\)H-.*/\1/p')
@@ -107,13 +107,16 @@ run_problem() {
 
     # Resultat
     {
-        echo "Solution found: $SOLUTION_FOUND"
-        echo "Problem name: $PROBLEM_NAME"
-        echo "Nombre de dades: $NUM_FACTS"
-        echo "Nombre d'estats: $NUM_STATES"
-        echo "Total time (s): $TOTAL_TIME"
+        echo "Solution trobada: $SOLUTION_FOUND"
+        echo "Nom del problema: $PROBLEM_NAME"
+        echo "Nombre d'habitacions: $HAB"
+        echo "Nombre de reserves: $RES"
+        echo "Nombre de fets (facts): $NUM_FACTS"
+        echo "Nombre d'estats creats: $NUM_STATES"
+        echo "Temps total(s): $TOTAL_TIME"
         echo "Plan:"
         echo "$PLAN"
+        echo ""
     } >> "$RESULTS_FILE"
 
     # Afegir fila a la taula CSV

@@ -18,10 +18,10 @@
     ;; Inicialitzar el cost total
     (= (reserves-assignades) 0)
     
-    ;; capacitates de las habitaciones
-    (= (capacitat hab1) 2)  ; Habitació 1: hasta 2 persones
-    (= (capacitat hab2) 3)  ; Habitació 2: hasta 3 persones
-    (= (capacitat hab3) 4)  ; Habitació 3: hasta 4 persones
+    ;; === HABITACIONS ===
+    (= (capacitat hab1) 2)  ; Habitació 1: fins a  2 persones
+    (= (capacitat hab2) 3)  ; Habitació 2: fins a  3 persones
+    (= (capacitat hab3) 4)  ; Habitació 3: fins a  4 persones
     
     ;; Reserva 1: 2 persones, dies 1-5
     (= (num-persones res1) 2)

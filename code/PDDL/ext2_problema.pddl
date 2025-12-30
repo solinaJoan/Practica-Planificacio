@@ -22,10 +22,10 @@
     (= (reserves-assignades) 0)
     (= (orientacions-incorrectes) 0)
 
-    ;; capacitates
-    (= (capacitat hab1) 2)
-    (= (capacitat hab2) 3)
-    (= (capacitat hab3) 4)
+    ;; === HABITACIONS ===
+    (= (capacitat hab1) 2)  ; Habitació 1: fins a  2 persones
+    (= (capacitat hab2) 3)  ; Habitació 2: fins a  3 persones
+    (= (capacitat hab3) 4)  ; Habitació 3: fins a  4 persones
 
     ;; Orientacions
     (te-orientacio hab1 nord)

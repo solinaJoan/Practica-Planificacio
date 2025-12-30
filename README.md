@@ -26,8 +26,8 @@
 Per executar les diferents extensions i problemes que hem creat, hem fet un script que et demana quina extensió volem executar. Podem decidir entre executar les diverses extensions fetes. Fa servir els codis per defecte, els de la carpeta code/PPDL/
 
 ```bash
-   # Executar
-   ./run_planificador.sh
+# Executar
+./run_planificador.sh
 ```
 
 2. **Generador de problemes** 
@@ -66,43 +66,25 @@ I ens generarà 5 fitxers amb diferents mides a test/experimentacio.
 2. **Experimentació** 
 Finalment, hem fet un script que genera problemes de mida creixent fent servir el generador de problemes que hem creat, i emmagatzema els respectius temps d'execució. Per executar-lo, hem de fer:
 ```bash
-   # Executar
-   ./run_experiments.sh
+# Executar
+./run_experiments.sh
 ```
 Aquest script crearà una carpeta a test/experiments/results/ amb els resultats de l'experimentació
 
-<!-- 
 ---
 
 ## Jocs de Prova
 
-### Problem-basic.pddl
-
-**Objectiu**: Verificar assignació bàsica sense solapaments
+Hem fet servir diversos jocs de prova. Per desenvolupar la pràctica hem fet servir els jocs de prova per defecte, a la carpeta de code/PDDL. Tots els jocs de prova per defecte tenen la mateixa configuració. 
 
 **Configuració:**
 - 3 habitacions (capacitats: 2, 3, 4)
-- 3 reserves amb preferències
-- 10 dies
+- 3 reserves 
+   - 2 persones dies 1-5, 
+   - 3 persones, dies 10-15
+   - 1 persona, dies 3-7
 
-**Resultat esperat:**
-- Totes les reserves assignades
-- Preferències d'orientació complides
-- Mínim desperdici de places
-
-### Problem-complex.pddl
-
-**Objectiu**: Provar solapaments i optimització
-
-**Configuració:**
-- 6 habitacions (capacitats variades: 1-4)
-- 8 reserves amb solapaments temporals
-- 30 dies complets
-
-**Resultat esperat:**
-- Màxim de reserves assignades
-- Mínim nombre d'habitacions obertes
-- Resolució de conflictes de solapament
+Per l'experimentació en canvi, hem fet servir el generador de jocs de prova amb configuraacions diferents a cada experiment.
 
 ---
 
@@ -111,34 +93,32 @@ Aquest script crearà una carpeta a test/experiments/results/ amb els resultats 
 ### Metodologia
 
 1. Generar problemes de mida creixent
-2. Executar metric-ff per cada problema
-3. Mesurar temps d'execució
+2. Executar metricff per cada problema
+3. Mesurar temps d'execució i mida del problema 
 4. Analitzar creixement de complexitat
-
-### Execució
-
-```bash
-./run_experiments.sh
-```
 
 ### Anàlisi de Resultats
 
-Els resultats es guarden a `results/experiments_[timestamp].txt` amb:
+Els resultats es guarden a `test/experiments/results/resultat_experiments.txt` i a `test/experiments/results/taula_resum.csv` amb:
 - Temps d'execució per cada problema
-- Longitud del pla (nombre d'accions)
+- Longitud i configuració del pla
 - Traces completes del planificador
 
 **Exemple d'output:**
-
 ```
-Problema: problem-petit
-Temps d'execució: 0.123s
-Solució trobada: SÍ
-Longitud del pla: 3 accions
-
-Problema: problem-mitja
-Temps d'execució: 0.456s
-Solució trobada: SÍ
-Longitud del pla: 6 accions
+Solution trobada: si
+Nom del problema: HOTEL-GENERATED-5H-6R
+Nombre d'habitacions: 5
+Nombre de reserves: 6
+Nombre de fets (facts): 240
+Nombre d'estats creats: 614
+Temps total(s): 0.32
+Plan:
+step    0: DESCARTAR-RESERVA R5
+        1: ASSIGNAR-RESERVA R1 H1
+        2: ASSIGNAR-RESERVA R3 H1
+        3: ASSIGNAR-RESERVA R4 H1
+        4: ASSIGNAR-RESERVA R2 H3
+        5: ASSIGNAR-RESERVA R6 H3
 ```
- -->
+

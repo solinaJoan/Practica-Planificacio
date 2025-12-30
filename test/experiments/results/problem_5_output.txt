@@ -25,3 +25,4 @@ advancing to distance:    8
                           4
                           3
                           2
+                          1

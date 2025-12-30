@@ -3,7 +3,7 @@
   
   (:objects
     ;; Habitaciones de l'hotel
-    hab1 hab2 hab3 hab4 hab5 hab6 - habitacio
+    hab1 hab2 hab3 - habitacio
     
     ;; Reserves a procesar
     res1 res2 res3 - reserva
@@ -20,17 +20,13 @@
     (= (places-lliures) 0)
     (= (habitacions-obertes) 0)
     
-    ;; Inicialitzar reserves i habitacions
-    ;; Capacitats de les habitaciones
-    (= (capacitat hab1) 1)  ; Habitació 1: hasta 1 persones
-    (= (capacitat hab2) 1)  ; Habitació 2: hasta 1 persones
-    (= (capacitat hab3) 1)  ; Habitació 3: hasta 1 persones
-    (= (capacitat hab4) 3)  ; Habitació 4: hasta 3 persones
-    (= (capacitat hab5) 3)  ; Habitació 5: hasta 3 persones
-    (= (capacitat hab6) 3)  ; Habitació 6: hasta 3 persones
+    ;; === HABITACIONS ===
+    (= (capacitat hab1) 2)  ; Habitació 1: fins a  2 persones
+    (= (capacitat hab2) 3)  ; Habitació 2: fins a  3 persones
+    (= (capacitat hab3) 4)  ; Habitació 3: fins a  4 persones
     
-    ;; Reserva 1: 1 persona, dies 1-5
-    (= (num-persones res1) 1)
+    ;; Reserva 1: 2 persones, dies 1-5
+    (= (num-persones res1) 2)
     (pendent res1)
     (dia-reserva res1 d1)
     (dia-reserva res1 d2)
@@ -38,24 +34,24 @@
     (dia-reserva res1 d4)
     (dia-reserva res1 d5)
     
-    ;; Reserva 2: 1 persona, dies 10-15
-    (= (num-persones res2) 1)
+    ;; Reserva 2: 3 persones, dies 10-15
+    (= (num-persones res2) 3)
     (pendent res2)
-    (dia-reserva res2 d3)
-    (dia-reserva res2 d4)
-    (dia-reserva res2 d5)
-    (dia-reserva res2 d6)
-    (dia-reserva res2 d7)
+    (dia-reserva res2 d10)
+    (dia-reserva res2 d11)
+    (dia-reserva res2 d12)
+    (dia-reserva res2 d13)
+    (dia-reserva res2 d14)
+    (dia-reserva res2 d15)
     
-    ;; Reserva 3: 2 persones, dies 3-7
-    (= (num-persones res3) 2)
+    ;; Reserva 3: 1 persona, dies 3-7
+    (= (num-persones res3) 1)
     (pendent res3)
-    (dia-reserva res3 d10)
-    (dia-reserva res3 d11)
-    (dia-reserva res3 d12)
-    (dia-reserva res3 d13)
-    (dia-reserva res3 d14)
-    (dia-reserva res3 d15)
+    (dia-reserva res3 d3)
+    (dia-reserva res3 d4)
+    (dia-reserva res3 d5)
+    (dia-reserva res3 d6)
+    (dia-reserva res3 d7)
   )
   
   (:goal
