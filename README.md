@@ -39,7 +39,7 @@ Hem fet servir diversos jocs de prova. Per desenvolupar la pràctica hem fet ser
 **Configuració:**
 - 3 habitacions (capacitats: 2, 3, 4)
 - 3 reserves 
-   - 2 persones dies 1-5, 
+   - 2 persones, dies 1-5
    - 3 persones, dies 10-15
    - 1 persona, dies 3-7
 
@@ -58,7 +58,7 @@ Per fer l'experimentació, hem creat un mode d'execució per generar diversos pr
 python3 ./test/problem_generator.py --suite
 ```
 
-Crea els problemes a la carpeta test/experiments/problemes. Si els creem amb mode `--suite`, els genera amb nom problema_x.pddl i si els creem manualment, posa el nom de l'extensió per la qual volem generar un problema (per defecte nivell_basic). 
+Crea els problemes a la carpeta test/experiments/problemes. Si els creem amb mode `--suite`, els genera amb nom `problema_x.pddl` i si els creem manualment, posa el nom de l'extensió per la qual volem generar un problema (per defecte nivell_basic). 
 
 **Paràmetres del generador de problemes**
 - `-H, --habitacions`: Nombre d'habitacions (default: 5)
@@ -68,13 +68,13 @@ Crea els problemes a la carpeta test/experiments/problemes. Si els creem amb mod
 - `--suite`: Genera múltiples problemes de mida creixent
 
 **Suite de Proves Generada**
-| Fitxer           | Habitacions | Reserves | Dies |
-|------------------|-------------|----------|------|
-| problem_1.pddl   | 3           | 3        | 30   |
-| problem_2.pddl   | 4           | 6        | 30   |
-| problem_3_.pddl  | 5           | 10       | 30   |
-| problem_4_.pddl  | 8           | 15       | 30   |
-| problem_5_.pddl  | 10          | 20       | 30   |
+| Fitxer                        | Habitacions | Reserves |
+|-------------------------------|-------------|----------|
+| problem_1.pddl                | 3           | 4        |
+| problem_2.pddl                | 4           | 5        |
+| problem_3_.pddl               | 5           | 6        |
+| problem_4_.pddl               | 6           | 7        |
+| problem_5_.pddl               | 7           | 8        |
 
 
 ## Experimentació i resultats
