@@ -1,0 +1,54 @@
+
+ff: parsing domain file
+domain 'HOTEL-RESERVES' defined
+ ... done.
+ff: parsing problem file
+problem 'HOTEL-GENERATED-4H-10R' defined
+ ... done.
+
+
+metric established (normalized to minimize): ((1.00*[RF1](PLACES-LLIURES)100.00*[RF0](HABITACIONS-OBERTES)1000.00*[RF2](RESERVES-ASSIGNADES)) - () + 0.00)
+
+task contains conditional effects. turning off state domination.
+
+
+
+checking for cyclic := effects --- OK.
+
+ff: search configuration is  best-first on 1*g(s) + 5*h(s) where
+    metric is ((1.00*[RF1](PLACES-LLIURES)100.00*[RF0](HABITACIONS-OBERTES)1000.00*[RF2](RESERVES-ASSIGNADES)) - () + 0.00)
+
+advancing to distance:   10
+                          9
+                          8
+                          7
+                          6
+                          5
+                          4
+                          3
+                          2
+                          1
+                          0
+
+ff: found legal plan as follows
+
+step    0: ASSIGNAR-RESERVA R1 H2
+        1: ASSIGNAR-RESERVA R6 H2
+        2: DESCARTAR-RESERVA R9
+        3: ASSIGNAR-RESERVA R3 H4
+        4: ASSIGNAR-RESERVA R5 H4
+        5: DESCARTAR-RESERVA R2
+        6: ASSIGNAR-RESERVA R8 H4
+        7: ASSIGNAR-RESERVA R10 H4
+        8: ASSIGNAR-RESERVA R4 H3
+        9: ASSIGNAR-RESERVA R7 H1
+     
+
+time spent:    0.15 seconds instantiating 10 easy, 23 hard action templates
+               0.00 seconds reachability analysis, yielding 260 facts and 33 actions
+               0.00 seconds creating final representation with 219 relevant facts, 3 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+             431.10 seconds searching, evaluating 55116 states, to a max depth of 0
+             431.25 seconds total time
+
