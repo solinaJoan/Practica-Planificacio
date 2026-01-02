@@ -1,0 +1,123 @@
+======================================
+  RESULTATS EXPERIMENTS METRIC-FF
+  Domini: Extensió 4
+  Data: Fri Jan  2 15:58:17     2026
+======================================
+
+Solution trobada: si
+Nom del problema: HOTEL-GENERATED-4H-4R
+Nombre d'habitacions: 4
+Nombre de reserves: 4
+Nombre d'estats: 53
+Nombre de fets (facts): 169
+Temps total(s): 0.16
+Plan:
+step    0: DESCARTAR-RESERVA R1
+        1: ASSIGNAR-RESERVA R2 H2
+        2: DESCARTAR-RESERVA R4
+        3: ASSIGNAR-RESERVA R3 H3
+
+Solution trobada: si
+Nom del problema: HOTEL-GENERATED-5H-4R
+Nombre d'habitacions: 5
+Nombre de reserves: 4
+Nombre d'estats: 193
+Nombre de fets (facts): 279
+Temps total(s): 0.16
+Plan:
+step    0: ASSIGNAR-RESERVA R4 H3
+        1: DESCARTAR-RESERVA R2
+        2: ASSIGNAR-RESERVA R1 H2
+        3: ASSIGNAR-RESERVA R3 H1
+
+Solution trobada: si
+Nom del problema: HOTEL-GENERATED-6H-4R
+Nombre d'habitacions: 6
+Nombre de reserves: 4
+Nombre d'estats: 239
+Nombre de fets (facts): 308
+Temps total(s): 0.16
+Plan:
+step    0: ASSIGNAR-RESERVA R2 H6
+        1: ASSIGNAR-RESERVA R3 H6
+        2: ASSIGNAR-RESERVA R1 H6
+        3: ASSIGNAR-RESERVA R4 H5
+
+Solution trobada: si
+Nom del problema: HOTEL-GENERATED-7H-4R
+Nombre d'habitacions: 7
+Nombre de reserves: 4
+Nombre d'estats: 339
+Nombre de fets (facts): 387
+Temps total(s): 0.16
+Plan:
+step    0: ASSIGNAR-RESERVA R4 H5
+        1: ASSIGNAR-RESERVA R3 H5
+        2: ASSIGNAR-RESERVA R1 H3
+        3: ASSIGNAR-RESERVA R2 H3
+
+Solution trobada: si
+Nom del problema: HOTEL-GENERATED-8H-4R
+Nombre d'habitacions: 8
+Nombre de reserves: 4
+Nombre d'estats: 1795
+Nombre de fets (facts): 418
+Temps total(s): 0.46
+Plan:
+step    0: ASSIGNAR-RESERVA R2 H2
+        1: ASSIGNAR-RESERVA R1 H2
+        2: ASSIGNAR-RESERVA R4 H7
+        3: ASSIGNAR-RESERVA R3 H1
+
+Solution trobada: si
+Nom del problema: HOTEL-GENERATED-9H-4R
+Nombre d'habitacions: 9
+Nombre de reserves: 4
+Nombre d'estats: 731
+Nombre de fets (facts): 421
+Temps total(s): 0.31
+Plan:
+step    0: ASSIGNAR-RESERVA R3 H2
+        1: ASSIGNAR-RESERVA R2 H2
+        2: ASSIGNAR-RESERVA R4 H9
+        3: ASSIGNAR-RESERVA R1 H3
+
+Solution trobada: si
+Nom del problema: HOTEL-GENERATED-10H-4R
+Nombre d'habitacions: 10
+Nombre de reserves: 4
+Nombre d'estats: 1039
+Nombre de fets (facts): 524
+Temps total(s): 0.31
+Plan:
+step    0: ASSIGNAR-RESERVA R1 H5
+        1: ASSIGNAR-RESERVA R3 H5
+        2: ASSIGNAR-RESERVA R4 H5
+        3: ASSIGNAR-RESERVA R2 H8
+
+Solution trobada: si
+Nom del problema: HOTEL-GENERATED-11H-4R
+Nombre d'habitacions: 11
+Nombre de reserves: 4
+Nombre d'estats: 1439
+Nombre de fets (facts): 549
+Temps total(s): 0.46
+Plan:
+step    0: ASSIGNAR-RESERVA R1 H1
+        1: ASSIGNAR-RESERVA R2 H1
+        2: ASSIGNAR-RESERVA R3 H10
+        3: ASSIGNAR-RESERVA R4 H10
+
+Solution trobada: si
+Nom del problema: HOTEL-GENERATED-12H-4R
+Nombre d'habitacions: 12
+Nombre de reserves: 4
+Nombre d'estats: 1271
+Nombre de fets (facts): 592
+Temps total(s): 0.62
+Plan:
+step    0: ASSIGNAR-RESERVA R3 H9
+        1: ASSIGNAR-RESERVA R2 H9
+        2: ASSIGNAR-RESERVA R4 H8
+        3: ASSIGNAR-RESERVA R1 H3
+
