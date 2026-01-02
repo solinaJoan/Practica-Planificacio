@@ -1,0 +1,89 @@
+\section{Modelatge del Domini}
+
+\vspace{0.3cm}
+
+\subsection{Tipus d'Objectes}
+
+El domini defineix tres tipus principals d'objectes que representen les entitats fonamentals del problema:
+
+\begin{itemize}
+    \item \textbf{habitacio}: representa una de les habitacions de l'hotel disponibles per assignar reserves.
+    \item \textbf{reserva}: representa una petició de reserva que cal processar i assignar.
+    \item \textbf{dia}: representa un dels 30 dies del mes durant els quals es poden fer reserves.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\subsection{Predicats}
+
+\vspace{0.3cm}
+
+\textbf{Predicats base:}
+
+\begin{itemize}
+    \item \texttt{(pendent ?r - reserva)}: indica que la reserva \texttt{?r} està pendent de processar. Serveix per controlar quines reserves encara no han estat tractades i per garantir que cada reserva es processi exactament una vegada.
+    
+    \item \texttt{(servida ?r - reserva)}: indica que la reserva \texttt{?r} ha estat assignada exitosament a una habitació. Aquest predicat es necessari per expressar l'objectiu del nivell bàsic, on totes les reserves han d'estar servides.
+    
+    \item \texttt{(assignada ?r - reserva ?h - habitacio)}: indica que l'habitació \texttt{?h} ha estat assignada a la reserva \texttt{?r}. Aquest predicat es imprescindible per mantenir la traçabilitat de les assignacions i poder consultar posteriorment quina habitació s'ha assignat a cada reserva.
+
+    \item \texttt{(ocupada ?h - habitacio ?d - dia)}: indica que l'habitació \texttt{?h} està ocupada durant el dia \texttt{?d}. Aquest predicat és crucial per evitar solapaments entre reserves, garantint que dues reserves no comparteixin la mateixa habitació en dates coincidents.
+    
+    \item \texttt{(dia-reserva ?r - reserva ?d - dia)}: indica que el dia \texttt{?d} forma part del període de la reserva \texttt{?r}. Aquest predicat és necessari per definir l'interval temporal de cada reserva i poder comprovar els solapaments amb altres reserves.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Predicats afegits a l'extensió 2 (orientacions):}
+
+A l'extensió 2, s'afegeixen dos predicats addicionals per gestionar les preferències d'orientació de les habitacions:
+
+\begin{itemize}
+    \item \texttt{(te-orientacio ?h - habitacio ?o - orientacio)}: indica l'orientació cardinal (N/S/E/O) de l'habitació \texttt{?h}. Aquest predicat permet al planificador conèixer les característiques de cada habitació.
+    
+    \item \texttt{(prefereix-orientacio ?r - reserva ?o - orientacio)}: indica la preferència d'orientació de la reserva \texttt{?r}. Aquest predicat és necessari per poder avaluar si una assignació compleix amb les preferències dels clients.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Predicats afegits a l'extensió 4 (habitacions obertes):}
+
+A l'extensió 4, s'afegeix un predicat per controlar quines habitacions s'han utilitzat durant el mes:
+
+\begin{itemize}
+    \item \texttt{(habitacio-oberta ?h - habitacio)}: indica que l'habitació \texttt{?h} ha estat utilitzada almenys una vegada durant el mes. Aquest predicat és fonamental per poder optimitzar el nombre d'habitacions diferents utilitzades, ja que permet detectar la primera vegada que s'assigna una habitació i incrementar el comptador corresponent.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\subsection{Funcions Numèriques}
+
+Les funcions defineixen atributs numèrics dels objectes i variables de control per a l'optimització.
+
+\vspace{0.3cm}
+
+\textbf{Funcions bàsiques (presents en totes les extensions):}
+
+\begin{itemize}
+    \item \texttt{(capacitat ?h - habitacio)}: retorna el nombre màxim de persones que pot allotjar l'habitació \texttt{?h} (entre 1 i 4). Aquesta funció és imprescindible per verificar que una habitació té capacitat suficient per una reserva donada.
+    
+    \item \texttt{(num-persones ?r - reserva)}: retorna el nombre de persones de la reserva \texttt{?r} (entre 1 i 4). Aquesta funció és necessària per comprovar la compatibilitat entre reserves i habitacions.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Funcions d'optimització:}
+
+Aquestes funcions s'utilitzen com a comptadors per construir la funció objectiu a minimitzar en les diferents extensions:
+
+\begin{itemize}
+    \item \texttt{(reserves-assignades)}: comptador utilitzat a partir de l'extensió 1 per penalitzar les reserves no assignades. S'incrementa en 5 (extensió 1) o en 1 (extensions 2, 3 i 4) cada vegada que es descarta una reserva. El valor diferent a l'extensió 1 és per donar-li més pes en la funció objectiu.
+    
+    \item \texttt{(orientacions-incorrectes)}: utilitzada a l'extensió 2 per comptar el nombre d'assignacions que no compleixen amb la preferència d'orientació del client. S'incrementa en 1 cada vegada que s'assigna una reserva a una habitació amb orientació diferent a la preferida.
+    
+    \item \texttt{(places-lliures)}: utilitzada a les extensions 3 i 4 per comptabilitzar el desperdici de places. S'incrementa amb la diferència entre la capacitat de l'habitació i el nombre de persones de la reserva en cada assignació.
+    
+    \item \texttt{(habitacions-obertes)}: utilitzada a l'extensió 4 per comptar el nombre total d'habitacions diferents utilitzades durant el mes. S'incrementa en 1 la primera vegada que s'utilitza cada habitació.
+\end{itemize}
+
+La justificació de cadascuna d'aquestes funcions rau en la necessitat d'expressar els diferents criteris d'optimització requerits per cada extensió del problema.

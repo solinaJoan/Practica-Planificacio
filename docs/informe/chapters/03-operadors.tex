@@ -1,0 +1,102 @@
+\section{Operadors}
+
+El domini defineix dues accions principals (\texttt{assignar-reserva} i \texttt{descartar-reserva}) que permeten al planificador construir solucions vàlides al problema d'assignació de reserves. 
+
+\vspace{0.3cm}
+
+No es requereixen operadors addicionals perquè el problema no presenta accions més complexes: totes les decisions es redueixen a assignar o no assignar cada reserva, i el planificador pot explorar diferents combinacions d'aquestes decisions per trobar la solució òptima segons el criteri especificat.
+
+\vspace{0.3cm}
+
+\subsection{Acció: assignar-reserva}
+
+Aquesta és l'acció principal del domini i està present en totes les extensions. Permet assignar una reserva pendent a una habitació que compleix els requisits necessaris.
+
+\vspace{0.3cm}
+
+\textbf{Paràmetres:}
+\begin{itemize}
+    \item \texttt{?r - reserva}: la reserva a assignar.
+    \item \texttt{?h - habitacio}: l'habitació on s'assignarà la reserva.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Precondicions:}
+
+\begin{enumerate}
+    \item \texttt{(pendent ?r)}: la reserva ha d'estar pendent de processar. Aquesta precondició és fonamental per evitar assignar la mateixa reserva múltiples vegades.
+    
+    \item \texttt{(>= (capacitat ?h) (num-persones ?r))}: l'habitació ha de tenir capacitat suficient per allotjar totes les persones de la reserva. Aquesta comprovació és essencial per garantir que la solució és físicament viable.
+    
+    \item \texttt{(forall (?d - dia) (imply (dia-reserva ?r ?d) (not (ocupada ?h ?d))))}: cap dels dies de la reserva pot coincidir amb una ocupació prèvia de l'habitació. Aquest quantificador universal és crucial per evitar solapaments temporals entre reserves a la mateixa habitació.
+\end{enumerate}
+
+Aquestes precondicions són necessàries i suficients per garantir que qualsevol assignació realitzada compleix amb les restriccions dures del problema (capacitat i no solapament).
+
+\vspace{0.3cm}
+
+\textbf{Efectes:}
+
+\begin{enumerate}
+    \item \texttt{(assignada ?r ?h)}: estableix la relació d'assignació entre la reserva i l'habitació. Aquest efecte és necessari per mantenir el registre de les assignacions.
+    
+    \item \texttt{(servida ?r)}: marca la reserva com a servida. Aquest efecte és necessari per complir l'objectiu del nivell bàsic.
+    
+    \item \texttt{(not (pendent ?r))}: elimina la reserva de les pendents. Aquest efecte és fonamental per evitar reprocessar la mateixa reserva.
+    
+    \item \texttt{(forall (?d - dia) (when (dia-reserva ?r ?d) (ocupada ?h ?d)))}: marca tots els dies de la reserva com a ocupats a l'habitació assignada. Aquest efecte condicional és imprescindible per prevenir assignacions futures que causin solapaments.
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\textbf{Efectes específics per extensions:}
+
+A l'extensió 2, s'afegeix un efecte addicional per comptabilitzar les orientacions incorrectes:
+
+\begin{itemize}
+    \item \texttt{(forall (?o - orientacio) (when (and (te-orientacio ?h ?o) (not (prefereix-orientacio ?r ?o))) (increase (orientacions-incorrectes) 1)))}: si l'orientació de l'habitació no coincideix amb la preferència de la reserva, s'incrementa el comptador d'orientacions incorrectes.
+\end{itemize}
+
+A l' extensió 3, s'afegeix l'efecte per comptabilitzar el desperdici de places:
+
+\begin{itemize}
+    \item \texttt{(increase (places-lliures) (- (capacitat ?h) (num-persones ?r)))}: incrementa el comptador de places lliures amb la diferència entre la capacitat de l'habitació i el nombre de persones de la reserva.
+\end{itemize}
+
+A l'extensió 4, s'afegeix l'efecte per controlar l'obertura d'habitacions:
+
+\begin{itemize}
+    \item \texttt{(when (not (habitacio-oberta ?h)) (and (habitacio-oberta ?h) (increase (habitacions-obertes) 1)))}: si és la primera vegada que s'utilitza l'habitació, es marca com a oberta i s'incrementa el comptador d'habitacions obertes.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\subsection{Acció: descartar-reserva}
+
+Aquesta acció s'introdueix a l'extensió 1 i es manté a totes les extensions posteriors. Permet al planificador deixar reserves sense assignar quan no és possible trobar una assignació vàlida o quan assignar-les empitjoraria excessivament la funció objectiu.
+
+\vspace{0.3cm}
+
+\textbf{Paràmetres:}
+\begin{itemize}
+    \item \texttt{?r - reserva}: la reserva a descartar.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Precondicions:}
+
+\begin{itemize}
+    \item \texttt{(pendent ?r)}: la reserva ha d'estar pendent. Aquesta és l'única precondició necessària, ja que qualsevol reserva pendent pot ser descartada.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Efectes:}
+
+\begin{enumerate}
+    \item \texttt{(not (pendent ?r))}: elimina la reserva de les pendents, permetent complir l'objectiu de l'extensió 1 que requereix que no hi hagi reserves pendents.
+    
+    \item \texttt{(increase (reserves-assignades) X)}: incrementa el comptador de reserves no assignades. El valor X és 5 a l'extensió 1 per donar-li més pes en la minimització, i 1 a les extensions 2, 3 i 4 on es combina amb altres criteris.
+\end{enumerate}
