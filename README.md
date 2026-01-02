@@ -1,7 +1,7 @@
 # Pràctica de Planificació - Intel·ligència Artificial
 ## Sistema d'Assignació de Reserves d'Hotel amb PDDL
 
-**Grup:** Anel Ademovich, Aleix Pitarch i Joan Solina  
+**Grup:** Anel Ademovic, Aleix Pitarch i Joan Solina  
 
 
 ## Objectius Aconseguits
