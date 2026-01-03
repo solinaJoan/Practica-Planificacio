@@ -186,12 +186,8 @@ class ReservaGenerator:
             
             # Goal
             f.write("  (:goal\n")
-            if self.extensio == 5:
-                f.write("    ;; Totes les reserves estan servides\n")
-                f.write("    (forall (?r - reserva) (servida ?r))\n")
-            else:
-                f.write("    ;; Totes les reserves han estat processades\n")
-                f.write("    (forall (?r - reserva) (not (pendent ?r)))\n")
+            f.write("    ;; Totes les reserves han estat processades\n")
+            f.write("    (forall (?r - reserva) (not (pendent ?r)))\n")
             f.write("  )\n")
 
             # Metric
@@ -262,7 +258,7 @@ def main():
             args.habitacions, 
             args.reserves, 
             30,
-            str(f"./test/{args.output}")
+            str(f"./test/experiments/{args.output}")
         )
 
 

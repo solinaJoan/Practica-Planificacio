@@ -46,7 +46,6 @@
     :effect (and
       ;; Assignar la reserva
       (assignada ?r ?h)
-      (servida ?r)
       (not (pendent ?r))
       
       ;; Marcar tots els dies de la reserva com ocupats

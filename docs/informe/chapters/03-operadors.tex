@@ -40,11 +40,9 @@ Aquestes precondicions són necessàries i suficients per garantir que qualsevol
 
 \begin{enumerate}
     \item \texttt{(assignada ?r ?h)}: estableix la relació d'assignació entre la reserva i l'habitació. Aquest efecte és necessari per mantenir el registre de les assignacions.
-    
-    \item \texttt{(servida ?r)}: marca la reserva com a servida. Aquest efecte és necessari per complir l'objectiu del nivell bàsic.
-    
-    \item \texttt{(not (pendent ?r))}: elimina la reserva de les pendents. Aquest efecte és fonamental per evitar reprocessar la mateixa reserva.
-    
+
+    \item \texttt{(not (pendent ?r))}: elimina la reserva de les pendents. Aquest efecte serveix per evitar reprocessar la mateixa reserva. i sobretot per crear l'objectiu (goal) del problema, que requereix que totes les reserves hagin estat processades almenys un cop. 
+
     \item \texttt{(forall (?d - dia) (when (dia-reserva ?r ?d) (ocupada ?h ?d)))}: marca tots els dies de la reserva com a ocupats a l'habitació assignada. Aquest efecte condicional és imprescindible per prevenir assignacions futures que causin solapaments.
 \end{enumerate}
 
@@ -74,7 +72,7 @@ A l'extensió 4, s'afegeix l'efecte per controlar l'obertura d'habitacions:
 
 \subsection{Acció: descartar-reserva}
 
-Aquesta acció s'introdueix a l'extensió 1 i es manté a totes les extensions posteriors. Permet al planificador deixar reserves sense assignar quan no és possible trobar una assignació vàlida o quan assignar-les empitjoraria excessivament la funció objectiu.
+Aquesta acció s'introdueix a l'extensió 1 i es manté a totes les extensions posteriors. Permet al planificador deixar reserves sense assignar quan no és possible trobar una assignació vàlida o quan assignar-les empitjoraria excessivament la funció objectiu. Al nivell bàsic, simplement no soluciona el problema i no dona cap assignació
 
 \vspace{0.3cm}
 

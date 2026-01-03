@@ -21,9 +21,7 @@ El domini defineix tres tipus principals d'objectes que representen les entitats
 \textbf{Predicats base:}
 
 \begin{itemize}
-    \item \texttt{(pendent ?r - reserva)}: indica que la reserva \texttt{?r} està pendent de processar. Serveix per controlar quines reserves encara no han estat tractades i per garantir que cada reserva es processi exactament una vegada.
-    
-    \item \texttt{(servida ?r - reserva)}: indica que la reserva \texttt{?r} ha estat assignada exitosament a una habitació. Aquest predicat es necessari per expressar l'objectiu del nivell bàsic, on totes les reserves han d'estar servides.
+    \item \texttt{(pendent ?r - reserva)}: indica que la reserva \texttt{?r} està pendent de processar. Serveix per controlar quines reserves encara no han estat tractades i per garantir que cada reserva es processi exactament una vegada. 
     
     \item \texttt{(assignada ?r - reserva ?h - habitacio)}: indica que l'habitació \texttt{?h} ha estat assignada a la reserva \texttt{?r}. Aquest predicat es imprescindible per mantenir la traçabilitat de les assignacions i poder consultar posteriorment quina habitació s'ha assignat a cada reserva.
 

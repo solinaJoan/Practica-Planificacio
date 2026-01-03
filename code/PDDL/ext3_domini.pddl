@@ -8,7 +8,6 @@
   (:predicates
     ;; Estat de les reserves
     (pendent ?r - reserva)
-    (servida ?r - reserva)
     (assignada ?r - reserva ?h - habitacio)
     
     ;; Habitació ocupada un dia
@@ -47,7 +46,6 @@
     :effect (and
       ;; Assignar la reserva
       (assignada ?r ?h)
-      (servida ?r)
       (not (pendent ?r))
       
       ;; Marcar tots els dies de la reserva com ocupats

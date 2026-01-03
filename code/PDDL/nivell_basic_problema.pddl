@@ -51,6 +51,6 @@
   
   (:goal
     ;; Totes las reserves estan servides
-    (forall (?r - reserva) (servida ?r))
+    (forall (?r - reserva) (not (pendent ?r)))
   )
 )
