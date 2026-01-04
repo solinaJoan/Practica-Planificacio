@@ -1,0 +1,35 @@
+\paragraph{Problema 1 Extensió 1}
+
+El problema proposat consta de \textbf{4 habitacions} amb capacitats diferents (1, 2, 3 i 4 persones) i \textbf{6 reserves}. L’horitzó temporal considerat abasta els \textbf{dies de l’1 al 12 del mes}. Cada reserva especifica un nombre de persones i un conjunt de dies consecutius durant els quals necessita allotjament.
+
+Les reserves tenen durades i solapaments diversos, de manera que no totes poden ser assignades simultàniament sense infringir les restriccions de capacitat o de solapament temporal. En particular, hi ha una reserva gran (4 persones, dies 1--10) que només pot ser assignada a una única habitació i que bloqueja aquest recurs durant molts dies.
+
+\paragraph{Objectiu del joc de prova}
+
+Aquest joc de prova té com a objectiu comprovar que el planificador és capaç de:
+\begin{itemize}
+  \item Assignar reserves únicament a habitacions amb capacitat suficient.
+  \item Evitar solapaments temporals entre reserves assignades a la mateixa habitació.
+  \item Seleccionar un subconjunt òptim de reserves quan no és possible assignar-les totes.
+\end{itemize}
+
+L’optimització es basa exclusivament en \textbf{maximitzar el nombre total de reserves assignades}, permetent que algunes reserves quedin sense assignar si això condueix a una millor solució global.
+
+\paragraph{Resultat esperat}
+
+S’espera que la solució òptima rebutgi la reserva gran i de llarga durada, ja que acceptar-la impediria assignar diverses reserves més petites. En conseqüència, el planificador hauria de prioritzar l’assignació de reserves curtes i de menys persones, assolint un nombre total de reserves assignades superior al que s’obtindria acceptant totes les reserves de gran mida.
+
+\paragraph{Resultat real}
+El planificador dona aquest resultat, que és el que esperàvem: 
+
+0: DESCARTAR-RESERVA R4
+1: ASSIGNAR-RESERVA R1 H1
+2: ASSIGNAR-RESERVA R2 H2
+3: ASSIGNAR-RESERVA R3 H3
+4: ASSIGNAR-RESERVA R5 H2
+5: ASSIGNAR-RESERVA R6 H1
+
+
+\paragraph{Problema 1 Extensió 1}
+
+Generat amb el generador de problemes, amb 4 habitacions i 10 reserves.

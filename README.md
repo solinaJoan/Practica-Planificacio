@@ -58,13 +58,14 @@ Per fer l'experimentació, hem creat un mode d'execució per generar diversos pr
 python3 ./test/problem_generator.py --suite
 ```
 
-Crea els problemes a la carpeta test/experiments/problemes. Si els creem amb mode `--suite`, els genera amb nom `problema_x.pddl` i si els creem manualment, posa el nom de l'extensió per la qual volem generar un problema (per defecte nivell_basic). 
+Crea els jocs de prova a la carpeta test/jocs-de-prova. Si els creem amb mode `--suite`, els genera amb nom `problema_x.pddl` i si els creem manualment, posa el nom de l'extensió per la qual volem generar un problema (per defecte nivell_basic). 
 
 **Paràmetres del generador de problemes**
 - `-H, --habitacions`: Nombre d'habitacions (default: 5)
 - `-r, --reserves`: Nombre de reserves (default: 8)
 - `-o, --output`: Fitxer de sortida. Si no l'especifiquem el fitxer de sortida és XXX_problem.pddl, on XXX és el valor de l'extensió a la que creem el problema
 - `-s, --seed`: Llavor aleatòria per reproducibilitat
+- `-e`: Nombre de l'extensió per la qual volem fer el joc de prova
 - `--suite`: Genera múltiples problemes de mida creixent
 
 **Suite de Proves Generada**
