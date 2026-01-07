@@ -36,7 +36,7 @@ El nivell bàsic del problema requereix que el planificador assigni totes les re
 
 \vspace{0.3cm}
 
-\subsubsection{Problema 1: Configuració Equilibrada}
+\subsubsection{Problema 1}
 
 Aquest problema ha estat generat amb la comanda:
 
@@ -85,7 +85,7 @@ La solució trobada demostra que el modelatge amb predicats \texttt{ocupada} i \
 
 \vspace{0.3cm}
 
-\subsubsection{Problema 2: Escenari amb Menys Pressió}
+\subsubsection{Problema 2}
 
 Aquest problema ha estat generat amb:
 
@@ -135,19 +135,13 @@ La baixa quantitat d'estats explorats (73) indica que, amb aquesta configuració
 
 \vspace{0.5cm}
 
-\subsection{Extensió 1: Maximitzar Reserves Assignades}
+\subsection{Extensió 1}
 
-A l'extensió 1 s'introdueix la possibilitat de descartar reserves i una mètrica d'optimització que penalitza cada reserva no assignada. La funció objectiu és:
-
-\begin{verbatim}
-(:metric minimize (reserves-assignades))
-\end{verbatim}
-
-on cada reserva descartada incrementa el cost en 5 unitats mitjançant l'acció \texttt{descartar-reserva}.
+A l'extensió 1 s'introdueix la possibilitat de descartar reserves i una mètrica d'optimització que penalitza cada reserva no assignada. 
 
 \vspace{0.3cm}
 
-\subsubsection{Problema 1: Escenari Dissenyat amb Conflictes}
+\subsubsection{Problema 1}
 
 Aquest problema ha estat dissenyat manualment per crear un escenari específic amb conflictes temporals i de capacitat interessants:
 
@@ -184,7 +178,6 @@ El planificador ha trobat una solució òptima:
     \item Estats avaluats: 60
     \item Reserves assignades: 5 (r1, r2, r3, r5, r6)
     \item Reserves descartades: 1 (r4)
-    \item Cost final: 5 (1 reserva per 5 unitats)
 \end{itemize}
 
 \vspace{0.3cm}
@@ -193,7 +186,7 @@ Com s'esperava, la reserva r4 (4 persones) ha estat descartada per incompatibili
 
 \vspace{0.3cm}
 
-\subsubsection{Problema 2: Demanda Superior a l'Oferta}
+\subsubsection{Problema 2}
 
 Aquest problema ha estat generat amb:
 
@@ -234,7 +227,6 @@ El planificador ha trobat una solució després d'una cerca substancial:
     \item Estats avaluats: 44,582
     \item Reserves assignades: 6 (r1, r2, r3, r5, r6, r7)
     \item Reserves descartades: 2 (r4, r8)
-    \item Cost final: 10 (2 reserves × 5 unitats)
 \end{itemize}
 
 \vspace{0.3cm}
@@ -243,30 +235,15 @@ El temps de resolució significatiu (37 segons) i l'alt nombre d'estats explorat
 
 \vspace{0.3cm}
 
-\textbf{Efecte del pes en la funció objectiu:}
 
-El pes de 5 unitats per reserva descartada és suficientment alt per motivar el planificador a explorar extensivament l'espai de cerca abans de decidir descarts. Si el pes fos més baix, el planificador podria trobar solucions més ràpidament però amb més descarts.
+\subsection{Extensió 2}
 
-\vspace{0.5cm}
-
-\subsection{Extensió 2: Optimització d'Orientacions}
-
-En l'extensió 2, a més de maximitzar reserves assignades, es té en compte l'orientació preferida per cada reserva. La mètrica combina dos criteris:
-
-\begin{verbatim}
-(:metric minimize
-  (+
-    (orientacions-incorrectes)
-    (* 100 (reserves-assignades))
-  )
-)
-\end{verbatim}
-
-La ponderació fa que sigui molt pitjor descartar una reserva (cost 100) que assignar-la amb orientació incorrecta (cost 1).
+En l’extensió 2, a més de maximitzar reserves assignades, es té en compte l’orientació
+preferida per cada reserva
 
 \vspace{0.3cm}
 
-\subsubsection{Problema 1: Conflictes Multi-dimensió}
+\subsubsection{Problema 1}
 
 Aquest problema ha estat generat amb:
 
@@ -307,7 +284,6 @@ El planificador ha trobat una solució després d'una cerca exhaustiva:
     \item Estats avaluats: 133,741
     \item Reserves assignades: 9
     \item Reserves descartades: 1 (r1)
-    \item Cost final: 100 (assumint 0 orientacions incorrectes en les assignades)
 \end{itemize}
 
 \vspace{0.3cm}
@@ -316,13 +292,7 @@ Aquest problema és el més computacionalment exigent de tots els jocs de prova.
 
 \vspace{0.3cm}
 
-\textbf{Efecte dels pesos en la funció objectiu:}
-
-El pes relatiu 100:1 entre descarts i orientacions incorrectes és crucial. Aquest pes implementa clarament la prioritat: el planificador acceptaria fins a 99 orientacions incorrectes abans de considerar descartar una reserva. El cost final de 100 indica que va ser necessari descartar 1 reserva.
-
-\vspace{0.3cm}
-
-\subsubsection{Problema 2: Orientacions amb Més Recursos}
+\subsubsection{Problema 2}
 
 Aquest problema ha estat generat amb:
 
@@ -373,24 +343,13 @@ Sorprenentment, aquest problema més gran s'ha resolt molt més ràpidament que 
 
 \vspace{0.5cm}
 
-\subsection{Extensió 3: Minimitzar Desperdici de Places}
+\subsection{Extensió 3}
 
-L'extensió 3 afegeix el criteri de minimitzar el nombre de places lliures (desperdiciades) quan s'assignen reserves a habitacions més grans del necessari. La mètrica és:
-
-\begin{verbatim}
-(:metric minimize
-  (+
-    (places-lliures)
-    (* 100 (reserves-assignades))
-  )
-)
-\end{verbatim}
-
-Cada vegada que s'assigna una reserva, s'incrementa \texttt{places-lliures} amb la diferència entre la capacitat de l'habitació i el nombre de persones de la reserva.
+L'extensió 3 afegeix el criteri de minimitzar el nombre de places lliures (desperdiciades) quan s'assignen reserves a habitacions més grans del necessari.
 
 \vspace{0.3cm}
 
-\subsubsection{Problema 1: Matching Òptim de Capacitats}
+\subsubsection{Problema 1}
 
 Aquest problema ha estat generat amb:
 
@@ -440,13 +399,8 @@ El temps de resolució moderat i l'exploració de més de 4,000 estats indiquen 
 
 \vspace{0.3cm}
 
-\textbf{Efecte dels pesos en la funció objectiu:}
 
-El pes 100:1 estableix una jerarquia clara: primer maximitzar reserves assignades, després minimitzar desperdici. Això significa que el planificador acceptaria desperdiciar fins a 99 places per evitar descartar una sola reserva. Els resultats confirmen aquest comportament.
-
-\vspace{0.3cm}
-
-\subsubsection{Problema 2: Escala Més Gran}
+\subsubsection{Problema 2}
 
 Aquest problema ha estat generat amb:
 
@@ -495,27 +449,13 @@ El temps de resolució de més de 11 segons i l'exploració de més de 20,000 es
 
 \vspace{0.5cm}
 
-\subsection{Extensió 4: Minimitzar Habitacions Obertes}
+\subsection{Extensió 4}
 
-L'extensió 4 és la més complexa, combinant tres criteris d'optimització: minimitzar reserves descartades, minimitzar habitacions diferents utilitzades, i minimitzar desperdici de places. La mètrica és:
-
-\begin{verbatim}
-(:metric minimize
-  (+
-    (places-lliures)
-    (+
-      (* 100 (habitacions-obertes))
-      (* 1000 (reserves-assignades))
-    )
-  )
-)
-\end{verbatim}
-
-Els pesos estableixen la jerarquia: primer no descartar reserves (pes 1000), després no obrir habitacions innecessàries (pes 100), finalment minimitzar desperdici (pes 1).
+L'extensió 4 és la més complexa, combinant tres criteris d'optimització: minimitzar reserves descartades, minimitzar habitacions diferents utilitzades, i minimitzar desperdici de places. 
 
 \vspace{0.3cm}
 
-\subsubsection{Problema 1: Reutilització d'Habitacions}
+\subsubsection{Problema 1}
 
 Aquest problema ha estat generat amb:
 
@@ -569,22 +509,7 @@ Aquest és un dels problemes computacionalment més exigents, amb un temps de re
 
 \vspace{0.3cm}
 
-\textbf{Efecte dels pesos en la funció objectiu:}
-
-Els pesos 1000:100:1 creen una jerarquia molt clara:
-
-\begin{itemize}
-    \item Descartar una reserva costa tant com obrir 10 habitacions noves
-    \item Obrir una habitació nova costa tant com desperdiciar 100 places
-\end{itemize}
-
-\vspace{0.3cm}
-
-Aquesta jerarquia motiva el planificador a concentrar reserves en poques habitacions, acceptant desperdici per evitar obertures, i només descartant quan és absolutament necessari.
-
-\vspace{0.3cm}
-
-\subsubsection{Problema 2: Escenari Més Compacte}
+\subsubsection{Problema 2}
 
 Aquest problema ha estat generat amb:
 
