@@ -29,78 +29,56 @@
     ;; Reserva r1: 3 persones, dies 24-29
     (= (num-persones r1) 3)
     (pendent r1)
-        (prefereix-orientacio r1 est)
-
     (dia-reserva r1 d24) (dia-reserva r1 d25) (dia-reserva r1 d26) (dia-reserva r1 d27) (dia-reserva r1 d28) (dia-reserva r1 d29)
 
     ;; Reserva r2: 4 persones, dies 3-6
     (= (num-persones r2) 4)
     (pendent r2)
-        (prefereix-orientacio r2 nord)
-
     (dia-reserva r2 d3) (dia-reserva r2 d4) (dia-reserva r2 d5) (dia-reserva r2 d6)
 
     ;; Reserva r3: 1 persones, dies 18-23
     (= (num-persones r3) 1)
     (pendent r3)
-        (prefereix-orientacio r3 oest)
-
     (dia-reserva r3 d18) (dia-reserva r3 d19) (dia-reserva r3 d20) (dia-reserva r3 d21) (dia-reserva r3 d22) (dia-reserva r3 d23)
 
     ;; Reserva r4: 1 persones, dies 2-8
     (= (num-persones r4) 1)
     (pendent r4)
-        (prefereix-orientacio r4 oest)
-
     (dia-reserva r4 d2) (dia-reserva r4 d3) (dia-reserva r4 d4) (dia-reserva r4 d5) (dia-reserva r4 d6) (dia-reserva r4 d7) (dia-reserva r4 d8)
 
     ;; Reserva r5: 1 persones, dies 6-19
     (= (num-persones r5) 1)
     (pendent r5)
-        (prefereix-orientacio r5 oest)
-
     (dia-reserva r5 d6) (dia-reserva r5 d7) (dia-reserva r5 d8) (dia-reserva r5 d9) (dia-reserva r5 d10) (dia-reserva r5 d11) (dia-reserva r5 d12) (dia-reserva r5 d13) (dia-reserva r5 d14) (dia-reserva r5 d15) (dia-reserva r5 d16) (dia-reserva r5 d17) (dia-reserva r5 d18) (dia-reserva r5 d19)
 
     ;; Reserva r6: 1 persones, dies 2-8
     (= (num-persones r6) 1)
     (pendent r6)
-        (prefereix-orientacio r6 oest)
-
     (dia-reserva r6 d2) (dia-reserva r6 d3) (dia-reserva r6 d4) (dia-reserva r6 d5) (dia-reserva r6 d6) (dia-reserva r6 d7) (dia-reserva r6 d8)
 
     ;; Reserva r7: 4 persones, dies 7-18
     (= (num-persones r7) 4)
     (pendent r7)
-        (prefereix-orientacio r7 est)
-
     (dia-reserva r7 d7) (dia-reserva r7 d8) (dia-reserva r7 d9) (dia-reserva r7 d10) (dia-reserva r7 d11) (dia-reserva r7 d12) (dia-reserva r7 d13) (dia-reserva r7 d14) (dia-reserva r7 d15) (dia-reserva r7 d16) (dia-reserva r7 d17) (dia-reserva r7 d18)
 
     ;; Reserva r8: 3 persones, dies 19-24
     (= (num-persones r8) 3)
     (pendent r8)
-        (prefereix-orientacio r8 nord)
-
     (dia-reserva r8 d19) (dia-reserva r8 d20) (dia-reserva r8 d21) (dia-reserva r8 d22) (dia-reserva r8 d23) (dia-reserva r8 d24)
 
     ;; Reserva r9: 3 persones, dies 16-26
     (= (num-persones r9) 3)
     (pendent r9)
-        (prefereix-orientacio r9 oest)
-
     (dia-reserva r9 d16) (dia-reserva r9 d17) (dia-reserva r9 d18) (dia-reserva r9 d19) (dia-reserva r9 d20) (dia-reserva r9 d21) (dia-reserva r9 d22) (dia-reserva r9 d23) (dia-reserva r9 d24) (dia-reserva r9 d25) (dia-reserva r9 d26)
 
     ;; Reserva r10: 2 persones, dies 19-21
     (= (num-persones r10) 2)
     (pendent r10)
-        (prefereix-orientacio r10 oest)
-
     (dia-reserva r10 d19) (dia-reserva r10 d20) (dia-reserva r10 d21)
 
     ;; Reserva r11: 2 persones, dies 5-13
     (= (num-persones r11) 2)
     (pendent r11)
-        (prefereix-orientacio r11 oest)
-
     (dia-reserva r11 d5) (dia-reserva r11 d6) (dia-reserva r11 d7) (dia-reserva r11 d8) (dia-reserva r11 d9) (dia-reserva r11 d10) (dia-reserva r11 d11) (dia-reserva r11 d12) (dia-reserva r11 d13)
 
   )

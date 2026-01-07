@@ -1,0 +1,90 @@
+
+ff: parsing domain file
+domain 'HOTEL-RESERVES' defined
+ ... done.
+ff: parsing problem file
+problem 'HOTEL-GENERATED-6H-8R' defined
+ ... done.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+ff: search configuration is  best-first on 1*g(s) + 5*h(s) where
+    metric is  plan length
+
+advancing to distance:    8
+                          7
+                          6
+                          5
+                          4
+                          3
+                          2
+                          1
+                          0
+
+ff: found legal plan as follows
+
+step    0: ASSIGNAR-RESERVA R1 H1
+        1: ASSIGNAR-RESERVA R2 H1
+        2: ASSIGNAR-RESERVA R3 H2
+        3: ASSIGNAR-RESERVA R4 H2
+        4: ASSIGNAR-RESERVA R5 H3
+        5: ASSIGNAR-RESERVA R6 H2
+        6: ASSIGNAR-RESERVA R7 H1
+        7: ASSIGNAR-RESERVA R8 H4
+     
+
+time spent:    0.15 seconds instantiating 0 easy, 38 hard action templates
+               0.00 seconds reachability analysis, yielding 364 facts and 38 actions
+               0.00 seconds creating final representation with 314 relevant facts, 0 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 144 states, to a max depth of 0
+               0.15 seconds total time
+
+
+ff: parsing domain file
+domain 'HOTEL-RESERVES' defined
+ ... done.
+ff: parsing problem file
+problem 'HOTEL-GENERATED-6H-7R' defined
+ ... done.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+ff: search configuration is  best-first on 1*g(s) + 5*h(s) where
+    metric is  plan length
+
+advancing to distance:    7
+                          6
+                          5
+                          4
+                          3
+                          2
+                          1
+                          0
+
+ff: found legal plan as follows
+
+step    0: ASSIGNAR-RESERVA R1 H1
+        1: ASSIGNAR-RESERVA R2 H2
+        2: ASSIGNAR-RESERVA R3 H1
+        3: ASSIGNAR-RESERVA R4 H5
+        4: ASSIGNAR-RESERVA R5 H5
+        5: ASSIGNAR-RESERVA R6 H4
+        6: ASSIGNAR-RESERVA R7 H6
+     
+
+time spent:    0.00 seconds instantiating 0 easy, 25 hard action templates
+               0.00 seconds reachability analysis, yielding 324 facts and 25 actions
+               0.00 seconds creating final representation with 249 relevant facts, 0 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 73 states, to a max depth of 0
+               0.00 seconds total time
+

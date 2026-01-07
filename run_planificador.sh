@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Carpeta base
-PDDL_DIR="code/PDDL"
+PDDL_DIR="test/jocs-prova"
 PLANNER="./code/metricff.exe"
 
 # Extensions disponibles
@@ -28,7 +28,8 @@ case $opcio in
 esac
 
 DOMINI="${EXT}_domini.pddl"
-PROBLEMA="${EXT}_problema.pddl"
+PROBLEMA1="${EXT}_problema1.pddl"
+PROBLEMA2="${EXT}_problema2.pddl"
 
 # Comprovacions
 if [ ! -f "$PDDL_DIR/$DOMINI" ]; then
@@ -36,8 +37,13 @@ if [ ! -f "$PDDL_DIR/$DOMINI" ]; then
   exit 1
 fi
 
-if [ ! -f "$PDDL_DIR/$PROBLEMA" ]; then
-  echo "Error: no existeix $PDDL_DIR/$PROBLEMA"
+if [ ! -f "$PDDL_DIR/$PROBLEMA1" ]; then
+  echo "Error: no existeix $PDDL_DIR/$PROBLEMA1"
+  exit 1
+fi
+
+if [ ! -f "$PDDL_DIR/$PROBLEMA2" ]; then
+  echo "Error: no existeix $PDDL_DIR/$PROBLEMA2"
   exit 1
 fi
 
@@ -50,4 +56,5 @@ echo
 echo "Executant $EXT ..."
 echo "----------------------------------------"
 
-$PLANNER -p "$PDDL_DIR/" -O -o "$DOMINI" -f "$PROBLEMA"
+$PLANNER -p "$PDDL_DIR/" -O -o "$DOMINI" -f "$PROBLEMA1" > "${EXT}_resultats.txt"
+$PLANNER -p "$PDDL_DIR/" -O -o "$DOMINI" -f "$PROBLEMA2" >> "${EXT}_resultats.txt"

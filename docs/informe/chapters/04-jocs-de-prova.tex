@@ -1,35 +1,637 @@
-\paragraph{Problema 1 Extensió 1}
+\section{Jocs de Prova}
 
-El problema proposat consta de \textbf{4 habitacions} amb capacitats diferents (1, 2, 3 i 4 persones) i \textbf{6 reserves}. L’horitzó temporal considerat abasta els \textbf{dies de l’1 al 12 del mes}. Cada reserva especifica un nombre de persones i un conjunt de dies consecutius durant els quals necessita allotjament.
+En aquesta secció presentem els jocs de prova dissenyats per a cada nivell i extensió del problema d'assignació de reserves a habitacions d'hotel.
 
-Les reserves tenen durades i solapaments diversos, de manera que no totes poden ser assignades simultàniament sense infringir les restriccions de capacitat o de solapament temporal. En particular, hi ha una reserva gran (4 persones, dies 1--10) que només pot ser assignada a una única habitació i que bloqueja aquest recurs durant molts dies.
+\vspace{0.3cm}
 
-\paragraph{Objectiu del joc de prova}
+Tots els problemes presentats han estat generats utilitzant el generador automàtic desenvolupat en Python.
 
-Aquest joc de prova té com a objectiu comprovar que el planificador és capaç de:
+\vspace{0.5cm}
+
+\subsection{Criteris de Disseny dels Jocs de Prova}
+
+El disseny dels jocs de prova s'ha basat en diversos criteris per garantir que les proves són representatives i no trivials:
+
+\vspace{0.3cm}
+
+\textbf{Satisfactibilitat garantida:} Tots els problemes generats tenen solució vàlida, com demostren els resultats obtinguts amb el planificador FF. Això permet validar el comportament correcte del sistema sense ambigüitats.
+
+\vspace{0.3cm}
+
+\textbf{Complexitat no trivial:} Malgrat ser satisfactibles, els problemes requereixen exploració significativa de l'espai de cerca, com evidencien els temps de resolució i el nombre d'estats avaluats. Els escenaris plantegen solapaments temporals complexos i restriccions de capacitat que interactuen entre si.
+
+\vspace{0.3cm}
+
+\textbf{Progressió de dificultat:} Els problemes dins de cada extensió tenen nivells de complexitat diferents, permetent observar com el planificador gestiona des de casos moderats fins a escenaris computacionalment més exigents.
+
+\vspace{0.3cm}
+
+\textbf{Cobertura funcional:} Cada extensió té almenys dos problemes que proven aspectes diferents de la funcionalitat implementada, demostrant l'efecte dels pesos en les funcions objectiu i la robustesa del modelatge.
+
+\vspace{0.5cm}
+
+\subsection{Nivell Bàsic}
+
+El nivell bàsic del problema requereix que el planificador assigni totes les reserves a habitacions, respectant les restriccions de capacitat i no solapament temporal, sense cap criteri d'optimització.
+
+\vspace{0.3cm}
+
+\subsubsection{Problema 1: Configuració Equilibrada}
+
+Aquest problema ha estat generat amb la comanda:
+
+\begin{verbatim}
+python problem_generator.py -e 5 -H 6 -r 8 -s 100 
+       -o nivell_basic_problema1.pddl
+\end{verbatim}
+
+\vspace{0.3cm}
+
+\textbf{Característiques del problema:}
+
 \begin{itemize}
-  \item Assignar reserves únicament a habitacions amb capacitat suficient.
-  \item Evitar solapaments temporals entre reserves assignades a la mateixa habitació.
-  \item Seleccionar un subconjunt òptim de reserves quan no és possible assignar-les totes.
+  \item 6 habitacions amb capacitats variades
+  \item 8 reserves amb diferents durades i nombre de persones
 \end{itemize}
 
-L’optimització es basa exclusivament en \textbf{maximitzar el nombre total de reserves assignades}, permetent que algunes reserves quedin sense assignar si això condueix a una millor solució global.
+\vspace{0.3cm}
 
-\paragraph{Resultat esperat}
+\textbf{Objectiu del test:}
 
-S’espera que la solució òptima rebutgi la reserva gran i de llarga durada, ja que acceptar-la impediria assignar diverses reserves més petites. En conseqüència, el planificador hauria de prioritzar l’assignació de reserves curtes i de menys persones, assolint un nombre total de reserves assignades superior al que s’obtindria acceptant totes les reserves de gran mida.
+Aquest problema té com a objectiu verificar que el planificador és capaç de trobar una assignació vàlida en un escenari amb una ràtio habitacions/reserves equilibrada (6/8 = 0.75). Volem comprovar que el sistema gestiona correctament els solapaments temporals i les restriccions de capacitat de manera simultània.
 
-\paragraph{Resultat real}
-El planificador dona aquest resultat, que és el que esperàvem: 
+\vspace{0.3cm}
 
-0: DESCARTAR-RESERVA R4
-1: ASSIGNAR-RESERVA R1 H1
-2: ASSIGNAR-RESERVA R2 H2
-3: ASSIGNAR-RESERVA R3 H3
-4: ASSIGNAR-RESERVA R5 H2
-5: ASSIGNAR-RESERVA R6 H1
+\textbf{Per què és no trivial:}
+
+Amb 8 reserves i 6 habitacions, el planificador ha d'explorar l'espai de combinacions per trobar una assignació on cap habitació tingui solapaments. Les reserves tenen durades variades (generades aleatòriament entre 1 i 15 dies) i capacitats diferents (1-4 persones), creant restriccions que redueixen l'espai de solucions vàlides.
+
+\vspace{0.3cm}
+
+\textbf{Resultats obtinguts:}
+
+El planificador FF ha trobat una solució vàlida assignant totes les 8 reserves:
+
+\begin{itemize}
+    \item Temps de resolució: 0.15 segons
+    \item Estats avaluats: 144
+    \item Longitud del pla: 8 accions (una per reserva)
+    \item Totes les reserves assignades correctament sense solapaments
+\end{itemize}
+
+\vspace{0.3cm}
+
+La solució trobada demostra que el modelatge amb predicats \texttt{ocupada} i \texttt{dia-reserva} funciona correctament per evitar conflictes temporals. La baixa complexitat computacional (144 estats) indica que el problema és manejable però requereix cerca no trivial.
+
+\vspace{0.3cm}
+
+\subsubsection{Problema 2: Escenari amb Menys Pressió}
+
+Aquest problema ha estat generat amb:
+
+\begin{verbatim}
+python problem_generator.py -e 5 -H 6 -r 7 -s 250 
+       -o nivell_basic_problema2.pddl
+\end{verbatim}
+
+\vspace{0.3cm}
+
+\textbf{Característiques del problema:}
+
+\begin{itemize}
+  \item 6 habitacions amb capacitats variades
+  \item 7 reserves amb intervals temporals diversos
+  \item Llavor aleatòria: 250
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Objectiu del test:}
+
+Aquest problema prova un escenari amb una ràtio encara més favorable (6/7 = 0.86), verificant que el sistema troba solucions eficients quan la pressió sobre els recursos és moderada. És útil per validar que el planificador no només funciona en casos límit, sinó també en situacions més còmodes.
+
+\vspace{0.3cm}
+
+\textbf{Per què és no trivial:}
+
+Malgrat tenir més habitacions que reserves, els solapaments temporals aleatoris i les restriccions de capacitat segueixen creant un problema de cerca no trivial. No totes les combinacions d'assignacions són vàlides, i el planificador ha de trobar una que respecti totes les restriccions.
+
+\vspace{0.3cm}
+
+\textbf{Resultats obtinguts:}
+
+El planificador ha resolt el problema de manera eficient:
+
+\begin{itemize}
+    \item Temps de resolució: 0.00 segons (gairebé instantani)
+    \item Estats avaluats: 73
+    \item Longitud del pla: 7 accions
+    \item Totes les reserves assignades sense conflictes
+\end{itemize}
+
+\vspace{0.3cm}
+
+La baixa quantitat d'estats explorats (73) indica que, amb aquesta configuració particular, el planificador ha trobat ràpidament una solució vàlida. Això no treu complexitat al problema, sinó que demostra l'efectivitat de les heurístiques utilitzades pel planificador FF.
+
+\vspace{0.5cm}
+
+\subsection{Extensió 1: Maximitzar Reserves Assignades}
+
+A l'extensió 1 s'introdueix la possibilitat de descartar reserves i una mètrica d'optimització que penalitza cada reserva no assignada. La funció objectiu és:
+
+\begin{verbatim}
+(:metric minimize (reserves-assignades))
+\end{verbatim}
+
+on cada reserva descartada incrementa el cost en 5 unitats mitjançant l'acció \texttt{descartar-reserva}.
+
+\vspace{0.3cm}
+
+\subsubsection{Problema 1: Escenari Dissenyat amb Conflictes}
+
+Aquest problema ha estat dissenyat manualment per crear un escenari específic amb conflictes temporals i de capacitat interessants:
+
+\vspace{0.3cm}
+
+\textbf{Característiques del problema:}
+
+\begin{itemize}
+    \item 3 habitacions amb capacitats 1, 2 i 3 places
+    \item 6 reserves amb solapaments temporals intensos
+    \item Inclou una reserva de 4 persones (r4) que és incompatible per capacitat
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Objectiu del test:}
+
+Aquest problema està dissenyat específicament per forçar el planificador a descartar reserves. Amb una reserva impossible d'assignar per capacitat i diversos solapaments temporals, el sistema ha de decidir quines reserves descartar per minimitzar el cost.
+
+\vspace{0.3cm}
+
+\textbf{Per què és no trivial:}
+
+La combinació de restriccions temporals i de capacitat crea un problema on no totes les reserves poden ser servides. El planificador ha d'explorar l'espai de decisions per trobar quina combinació de reserves assignades i descartades minimitza el cost global.
+
+\vspace{0.3cm}
+
+\textbf{Resultats obtinguts:}
+
+El planificador ha trobat una solució òptima:
+
+\begin{itemize}
+    \item Temps de resolució: 0.00 segons
+    \item Estats avaluats: 60
+    \item Reserves assignades: 5 (r1, r2, r3, r5, r6)
+    \item Reserves descartades: 1 (r4)
+    \item Cost final: 5 (1 reserva per 5 unitats)
+\end{itemize}
+
+\vspace{0.3cm}
+
+Com s'esperava, la reserva r4 (4 persones) ha estat descartada per incompatibilitat de capacitat. Les altres 5 reserves s'han pogut assignar respectant els solapaments temporals. Aquest resultat valida que el planificador minimitza correctament el nombre de descarts.
+
+\vspace{0.3cm}
+
+\subsubsection{Problema 2: Demanda Superior a l'Oferta}
+
+Aquest problema ha estat generat amb:
+
+\begin{verbatim}
+python problem_generator.py -e 1 -H 4 -r 8 -s 400 
+       -o ext1_problema2.pddl
+\end{verbatim}
+
+\vspace{0.3cm}
+
+\textbf{Característiques del problema:}
+
+\begin{itemize}
+    \item 4 habitacions amb capacitats variades
+    \item 8 reserves generades aleatòriament
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Objectiu del test:}
+
+Amb una ràtio de 4 habitacions per 8 reserves (0.5), aquest problema prova un escenari amb més demanda que oferta. El planificador ha de decidir quines reserves descartar per maximitzar el nombre d'assignades, considerant tant solapaments temporals com restriccions de capacitat.
+
+\vspace{0.3cm}
+
+\textbf{Per què és no trivial:}
+
+L'espai de cerca és significativament més gran que en el problema manual: amb 8 reserves i múltiples opcions de descart, el planificador ha d'explorar moltes combinacions possibles per trobar la que minimitza el cost. A més, la distribució aleatòria de durades i capacitats crea un problema genuïnament complex.
+
+\vspace{0.3cm}
+
+\textbf{Resultats obtinguts:}
+
+El planificador ha trobat una solució després d'una cerca substancial:
+
+\begin{itemize}
+    \item Temps de resolució: 37.03 segons
+    \item Estats avaluats: 44,582
+    \item Reserves assignades: 6 (r1, r2, r3, r5, r6, r7)
+    \item Reserves descartades: 2 (r4, r8)
+    \item Cost final: 10 (2 reserves × 5 unitats)
+\end{itemize}
+
+\vspace{0.3cm}
+
+El temps de resolució significatiu (37 segons) i l'alt nombre d'estats explorats (44,582) demostren que aquest és un problema computacionalment exigent. El planificador ha hagut de descartar 2 reserves per trobar una assignació vàlida per a les 6 restants, validant que el cost de 5 unitats per descart motiva el sistema a maximitzar les assignacions.
+
+\vspace{0.3cm}
+
+\textbf{Efecte del pes en la funció objectiu:}
+
+El pes de 5 unitats per reserva descartada és suficientment alt per motivar el planificador a explorar extensivament l'espai de cerca abans de decidir descarts. Si el pes fos més baix, el planificador podria trobar solucions més ràpidament però amb més descarts.
+
+\vspace{0.5cm}
+
+\subsection{Extensió 2: Optimització d'Orientacions}
+
+En l'extensió 2, a més de maximitzar reserves assignades, es té en compte l'orientació preferida per cada reserva. La mètrica combina dos criteris:
+
+\begin{verbatim}
+(:metric minimize
+  (+
+    (orientacions-incorrectes)
+    (* 100 (reserves-assignades))
+  )
+)
+\end{verbatim}
+
+La ponderació fa que sigui molt pitjor descartar una reserva (cost 100) que assignar-la amb orientació incorrecta (cost 1).
+
+\vspace{0.3cm}
+
+\subsubsection{Problema 1: Conflictes Multi-dimensió}
+
+Aquest problema ha estat generat amb:
+
+\begin{verbatim}
+python problem_generator.py -e 2 -H 6 -r 10 -s 500 
+       -o ext2_problema1.pddl
+\end{verbatim}
+
+\vspace{0.3cm}
+
+\textbf{Característiques del problema:}
+
+\begin{itemize}
+    \item 6 habitacions amb diferents orientacions i capacitats
+    \item 10 reserves amb preferències d'orientació variades
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Objectiu del test:}
+
+Aquest problema planteja situacions on el planificador ha d'equilibrar tres dimensions: capacitat, temps i orientació. L'objectiu és verificar que el sistema respecta la jerarquia de prioritats: primer no descartar, després minimitzar orientacions incorrectes.
+
+\vspace{0.3cm}
+
+\textbf{Per què és no trivial:}
+
+La combinació de solapaments temporals, restriccions de capacitat i preferències d'orientació genera un espai de decisions ric on el planificador ha de fer trade-offs complexos. Cada decisió d'assignació afecta les opcions futures en múltiples dimensions.
+
+\vspace{0.3cm}
+
+\textbf{Resultats obtinguts:}
+
+El planificador ha trobat una solució després d'una cerca exhaustiva:
+
+\begin{itemize}
+    \item Temps de resolució: 1842.34 segons (aproximadament 31 minuts)
+    \item Estats avaluats: 133,741
+    \item Reserves assignades: 9
+    \item Reserves descartades: 1 (r1)
+    \item Cost final: 100 (assumint 0 orientacions incorrectes en les assignades)
+\end{itemize}
+
+\vspace{0.3cm}
+
+Aquest problema és el més computacionalment exigent de tots els jocs de prova. El temps de resolució de més de 30 minuts i l'exploració de més de 133,000 estats demostren la complexitat de gestionar simultàniament tres criteris. El fet que només s'hagi descartat una reserva valida que el planificador prioritza correctament les assignacions.
+
+\vspace{0.3cm}
+
+\textbf{Efecte dels pesos en la funció objectiu:}
+
+El pes relatiu 100:1 entre descarts i orientacions incorrectes és crucial. Aquest pes implementa clarament la prioritat: el planificador acceptaria fins a 99 orientacions incorrectes abans de considerar descartar una reserva. El cost final de 100 indica que va ser necessari descartar 1 reserva.
+
+\vspace{0.3cm}
+
+\subsubsection{Problema 2: Orientacions amb Més Recursos}
+
+Aquest problema ha estat generat amb:
+
+\begin{verbatim}
+python problem_generator.py -e 2 -H 7 -r 12 -s 600 
+       -o ext2_problema2.pddl
+\end{verbatim}
+
+\vspace{0.3cm}
+
+\textbf{Característiques del problema:}
+
+\begin{itemize}
+    \item 7 habitacions amb diferents orientacions
+    \item 12 reserves amb preferències variades
+\end{itemize}
 
 
-\paragraph{Problema 1 Extensió 1}
+\vspace{0.3cm}
 
-Generat amb el generador de problemes, amb 4 habitacions i 10 reserves.
+\textbf{Objectiu del test:}
+
+Aquest és el problema més gran de l'extensió 2 en termes de nombre de reserves (12). L'objectiu és validar que el sistema escala correctament i pot gestionar problemes de mida substancial.
+
+\vspace{0.3cm}
+
+\textbf{Per què és no trivial:}
+
+Amb 12 reserves i 7 habitacions, hi ha moltes possibles assignacions i l'espai de cerca és ampli. Les restriccions d'orientació afegeixen complexitat addicional, obligant el planificador a considerar múltiples dimensions simultàniament.
+
+\vspace{0.3cm}
+
+\textbf{Resultats obtinguts:}
+
+Contràriament al problema anterior, aquest s'ha resolt molt més ràpidament:
+
+\begin{itemize}
+    \item Temps de resolució: 0.31 segons
+    \item Estats avaluats: 396
+    \item Reserves assignades: 12 (totes)
+    \item Reserves descartades: 0
+    \item Longitud del pla: 12 accions
+\end{itemize}
+
+\vspace{0.3cm}
+
+Sorprenentment, aquest problema més gran s'ha resolt molt més ràpidament que el Problema 1. Això demostra que la complexitat computacional no depèn només de la mida, sinó també de la distribució específica de solapaments i preferències generada per la llavor aleatòria. En aquest cas, les heurístiques del planificador han trobat ràpidament una solució que assigna totes les reserves.
+
+\vspace{0.5cm}
+
+\subsection{Extensió 3: Minimitzar Desperdici de Places}
+
+L'extensió 3 afegeix el criteri de minimitzar el nombre de places lliures (desperdiciades) quan s'assignen reserves a habitacions més grans del necessari. La mètrica és:
+
+\begin{verbatim}
+(:metric minimize
+  (+
+    (places-lliures)
+    (* 100 (reserves-assignades))
+  )
+)
+\end{verbatim}
+
+Cada vegada que s'assigna una reserva, s'incrementa \texttt{places-lliures} amb la diferència entre la capacitat de l'habitació i el nombre de persones de la reserva.
+
+\vspace{0.3cm}
+
+\subsubsection{Problema 1: Matching Òptim de Capacitats}
+
+Aquest problema ha estat generat amb:
+
+\begin{verbatim}
+python problem_generator.py -e 3 -H 6 -r 11 -s 700 
+       -o ext3_problema1.pddl
+\end{verbatim}
+
+\vspace{0.3cm}
+
+\textbf{Característiques del problema:}
+
+\begin{itemize}
+    \item 6 habitacions amb capacitats variades (1-4 places)
+    \item 11 reserves amb diferents nombre de persones
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Objectiu del test:}
+
+Aquest problema prova situacions on el planificador ha de decidir entre matchings perfectes de capacitat que poden crear conflictes temporals posteriors, versus matchings subòptims que deixen més flexibilitat. L'objectiu és verificar que el sistema fa raonament global, no només local.
+
+\vspace{0.3cm}
+
+\textbf{Per què és no trivial:}
+
+El planificador ha de considerar el trade-off entre minimitzar desperdici de places (pes 1) i evitar descarts de reserves (pes 100). Una decisió primerenca d'assignar una reserva a l'habitació de capacitat exacta pot bloquejar opcions millors posteriors, obligant el planificador a explorar l'espai de cerca estratègicament.
+
+\vspace{0.3cm}
+
+\textbf{Resultats obtinguts:}
+
+El planificador ha trobat una solució eficient:
+
+\begin{itemize}
+    \item Temps de resolució: 0.77 segons
+    \item Estats avaluats: 4,063
+    \item Reserves assignades: 11 (totes)
+    \item Longitud del pla: 11 accions
+    \item Cost final: depèn del desperdici total de places
+\end{itemize}
+
+\vspace{0.3cm}
+
+El temps de resolució moderat i l'exploració de més de 4,000 estats indiquen que el planificador ha fet una cerca no trivial per trobar una bona solució. L'assignació de totes les 11 reserves demostra que el pes de 100 per descart és suficient per motivar el planificador a acceptar cert desperdici de places abans de descartar reserves.
+
+\vspace{0.3cm}
+
+\textbf{Efecte dels pesos en la funció objectiu:}
+
+El pes 100:1 estableix una jerarquia clara: primer maximitzar reserves assignades, després minimitzar desperdici. Això significa que el planificador acceptaria desperdiciar fins a 99 places per evitar descartar una sola reserva. Els resultats confirmen aquest comportament.
+
+\vspace{0.3cm}
+
+\subsubsection{Problema 2: Escala Més Gran}
+
+Aquest problema ha estat generat amb:
+
+\begin{verbatim}
+python problem_generator.py -e 3 -H 8 -r 14 -s 800 
+       -o ext3_problema2.pddl
+\end{verbatim}
+
+\vspace{0.3cm}
+
+\textbf{Característiques del problema:}
+
+\begin{itemize}
+    \item 8 habitacions amb tota la gamma de capacitats
+    \item 14 reserves amb tots els tamanys possibles
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Objectiu del test:}
+
+Aquest és el problema més gran de l'extensió 3, amb 14 reserves a assignar. L'objectiu és validar l'escalabilitat del sistema i observar com gestiona el matching òptim quan hi ha moltes opcions disponibles.
+
+\vspace{0.3cm}
+
+\textbf{Per què és no trivial:}
+
+Amb 8 habitacions i 14 reserves, l'espai de possibles assignacions és molt ampli. El planificador ha d'explorar moltes combinacions per trobar una que maximitzi les reserves assignades i minimitzi el desperdici global, respectant les restriccions temporals i de capacitat.
+
+\vspace{0.3cm}
+
+\textbf{Resultats obtinguts:}
+
+El planificador ha resolt el problema després d'una cerca substancial:
+
+\begin{itemize}
+    \item Temps de resolució: 11.41 segons
+    \item Estats avaluats: 20,810
+    \item Reserves assignades: 14 (totes)
+    \item Longitud del pla: 14 accions
+\end{itemize}
+
+\vspace{0.3cm}
+
+El temps de resolució de més de 11 segons i l'exploració de més de 20,000 estats demostren la complexitat computacional d'aquest problema. Tot i així, el planificador ha aconseguit assignar totes les 14 reserves, validant la robustesa del modelatge en problemes de mida considerable.
+
+\vspace{0.5cm}
+
+\subsection{Extensió 4: Minimitzar Habitacions Obertes}
+
+L'extensió 4 és la més complexa, combinant tres criteris d'optimització: minimitzar reserves descartades, minimitzar habitacions diferents utilitzades, i minimitzar desperdici de places. La mètrica és:
+
+\begin{verbatim}
+(:metric minimize
+  (+
+    (places-lliures)
+    (+
+      (* 100 (habitacions-obertes))
+      (* 1000 (reserves-assignades))
+    )
+  )
+)
+\end{verbatim}
+
+Els pesos estableixen la jerarquia: primer no descartar reserves (pes 1000), després no obrir habitacions innecessàries (pes 100), finalment minimitzar desperdici (pes 1).
+
+\vspace{0.3cm}
+
+\subsubsection{Problema 1: Reutilització d'Habitacions}
+
+Aquest problema ha estat generat amb:
+
+\begin{verbatim}
+python problem_generator.py -e 4 -H 6 -r 8 -s 900 
+       -o ext4_problema1.pddl
+\end{verbatim}
+
+\vspace{0.3cm}
+
+\textbf{Característiques del problema:}
+
+\begin{itemize}
+    \item 6 habitacions disponibles
+    \item 8 reserves amb intervals temporals diversos
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Objectiu del test:}
+
+Aquest problema té com a objectiu verificar que el planificador minimitza el nombre d'habitacions diferents utilitzades, reutilitzant-les quan els períodes de les reserves no se solapen. Volem observar com el sistema equilibra els tres criteris simultàniament.
+
+\vspace{0.3cm}
+
+\textbf{Per què és no trivial:}
+
+L'extensió 4 utilitza efectes condicionals per incrementar el comptador d'habitacions obertes només la primera vegada que s'utilitza cada habitació. Això fa que l'espai de cerca creixi significativament, ja que el planificador ha de raonejar sobre l'ordre de les assignacions i la reutilització estratègica d'habitacions.
+
+\vspace{0.3cm}
+
+Els tres criteris poden entrar en conflicte: reutilitzar una habitació estalvia cost d'obertura (100) però pot incrementar desperdici de places si el matching de capacitat no és òptim.
+
+\vspace{0.3cm}
+
+\textbf{Resultats obtinguts:}
+
+El planificador ha trobat una solució després d'una cerca intensiva:
+
+\begin{itemize}
+    \item Temps de resolució: 325.47 segons (aproximadament 5.4 minuts)
+    \item Estats avaluats: 69,005
+    \item Reserves assignades: 7
+    \item Reserves descartades: 1 (r1)
+    \item Longitud del pla: 8 accions (7 assignacions + 1 descart)
+\end{itemize}
+
+\vspace{0.3cm}
+
+Aquest és un dels problemes computacionalment més exigents, amb un temps de resolució de més de 5 minuts. L'alt nombre d'estats explorats (69,005) reflecteix la complexitat introduïda pels efectes condicionals i els tres criteris d'optimització. El planificador ha hagut de descartar 1 reserva, indicant que no era possible assignar totes les 8 amb els recursos disponibles.
+
+\vspace{0.3cm}
+
+\textbf{Efecte dels pesos en la funció objectiu:}
+
+Els pesos 1000:100:1 creen una jerarquia molt clara:
+
+\begin{itemize}
+    \item Descartar una reserva costa tant com obrir 10 habitacions noves
+    \item Obrir una habitació nova costa tant com desperdiciar 100 places
+\end{itemize}
+
+\vspace{0.3cm}
+
+Aquesta jerarquia motiva el planificador a concentrar reserves en poques habitacions, acceptant desperdici per evitar obertures, i només descartant quan és absolutament necessari.
+
+\vspace{0.3cm}
+
+\subsubsection{Problema 2: Escenari Més Compacte}
+
+Aquest problema ha estat generat amb:
+
+\begin{verbatim}
+python problem_generator.py -e 4 -H 6 -r 7 -s 1100 
+       -o ext4_problema2.pddl
+\end{verbatim}
+
+\vspace{0.3cm}
+
+\textbf{Característiques del problema:}
+
+\begin{itemize}
+    \item 6 habitacions disponibles
+    \item 7 reserves (una menys que el Problema 1)
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Objectiu del test:}
+
+Amb una reserva menys que el Problema 1, aquest escenari permet validar que el temps de resolució es redueix significativament quan la mida del problema disminueix lleugerament. També prova la reutilització d'habitacions en un context on hi ha menys pressió sobre els recursos.
+
+\vspace{0.3cm}
+
+\textbf{Per què és no trivial:}
+
+Tot i tenir menys reserves, el problema segueix sent computacionalment complex degut als efectes condicionals i els tres criteris d'optimització. El planificador ha de trobar una configuració que minimitzi el nombre d'habitacions obertes mentre respecta les altres restriccions.
+
+\vspace{0.3cm}
+
+\textbf{Resultats obtinguts:}
+
+El planificador ha resolt el problema molt més ràpidament que el Problema 1:
+
+\begin{itemize}
+    \item Temps de resolució: 1.56 segons
+    \item Estats avaluats: 7,094
+    \item Reserves assignades: 5
+    \item Reserves descartades: 2 (r1, r2)
+    \item Longitud del pla: 7 accions
+\end{itemize}
+
+\vspace{0.3cm}
+
+La diferència dramàtica en temps de resolució (1.56s vs 325s) demostra la sensibilitat de la complexitat computacional a la mida del problema i la distribució específica generada per la llavor aleatòria. Tot i que aquest problema ha requerit descartar 2 reserves (en lloc d'1), el planificador l'ha resolt molt més ràpidament.
+
+\vspace{0.3cm}
+
+Aquest resultat il·lustra que, en problemes d'optimització amb múltiples criteris, la distribució específica de solapaments i capacitats pot tenir un impacte més gran en la complexitat computacional que la mida nominal del problema.

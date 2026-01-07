@@ -1,3 +1,59 @@
 \section{Conclusions}
 
-\textbf{Sobre l'experimentació} L'anàlisi experimental revela que la complexitat del problema d'assignació de reserves creix de manera exponencial, especialment quan s'incrementa el nombre de reserves. El creixement simultani d'ambdues dimensions d'habitacions i reserves produeix l'escalada més pronunciada en el temps de planificació. Els resultats suggereixen la necessitat d'utilitzar heurístiques o tècniques de descomposició per abordar problemes de major escala. Fer servir un generador aleatori ha produït que tinguem problemes semblants a la realitat difícils de reproduir. També ha fet que alguns problemes siguin exageradament difícils i d'altres resolts més ràpidament tot i ser un poblema de més tamany
+Aquest treball ha demostrat la viabilitat d'aplicar tècniques de planificació automàtica al problema d'assignació de reserves d'hotel, obtenint solucions òptimes respecte a múltiples criteris simultàniament. A continuació presentem les conclusions principals del projecte, organitzades per àrees temàtiques.
+
+\vspace{0.5cm}
+
+\subsection{Sobre el Modelatge}
+
+El modelatge en PDDL del problema d'assignació de reserves ha resultat ser expressiu i eficient. L'ús de predicats temporals com \texttt{ocupada} i \texttt{dia-reserva}, combinats amb quantificadors universals a les precondicions, permet capturar de manera elegant les restriccions de no solapament sense necessitat de fer-ho explícit per cada parell de dies. 
+
+\vspace{0.3cm}
+
+Les funcions numèriques han demostrat ser l'eina adequada per implementar criteris d'optimització complexos. L'ús de comptadors que s'incrementen segons els efectes de les accions permet expressar funcions objectiu multi-criteri de manera natural. La jerarquització de criteris mitjançant pesos relatius (1000:100:1 a l'extensió 4) ha funcionat correctament, motivant el planificador a prendre decisions coherents amb les prioritats establertes.
+
+\vspace{0.3cm}
+
+L'evolució incremental del modelatge a través de les extensions ha permès validar cada afegit de manera independent. Aquesta metodologia facilita la detecció d'errors i permet comprendre l'impacte de cada component en la complexitat global del problema.
+
+\vspace{0.5cm}
+
+\subsection{Sobre els Jocs de Prova}
+
+Els jocs de prova han estat fonamentals per validar la correcció del modelatge implementat. Tots els problemes generats han estat resolts satisfactòriament pel planificador FF, demostrant que el sistema és capaç de gestionar escenaris diversos amb diferents nivells de complexitat.
+
+\vspace{0.3cm}
+
+La generació aleatòria de problemes mitjançant el generador en Python ha proporcionat diversitat en els casos de prova, simulant situacions realistes amb solapaments temporals i distribucions de capacitats variades. No obstant això, també ha revelat una sensibilitat significativa als paràmetres de generació: problemes amb mides similars poden presentar complexitats computacionals molt diferents segons la distribució específica de solapaments generada per la llavor aleatòria.
+
+\vspace{0.3cm}
+
+Els resultats dels jocs de prova validen que els pesos assignats a les funcions objectiu implementen correctament les jerarquies de prioritat especificades. Per exemple, el pes 100:1 entre descarts i orientacions incorrectes a l'extensió 2 motiva clarament el planificador a acceptar moltes orientacions subòptimes abans de considerar descartar una reserva.
+
+\vspace{0.5cm}
+
+\subsection{Sobre l'Experimentació}
+
+L'anàlisi experimental ha revelat patrons clars sobre els factors que determinen la complexitat computacional del problema. El creixement del nombre de reserves té un impacte molt més significatiu que el creixement del nombre d'habitacions: incrementar reserves causa creixement exponencial del temps de planificació, mentre que incrementar habitacions produeix un creixement més moderat.
+
+\vspace{0.3cm}
+
+Aquest comportament és coherent amb la naturalesa combinatòria del problema. Cada reserva addicional multiplica les opcions de decisió disponibles (assignar a quina habitació, o descartar), i afegeix noves restriccions temporals que interactuen amb les reserves existents. En canvi, habitacions addicionals simplement augmenten les opcions disponibles sense incrementar significativament l'espai de cerca.
+
+\vspace{0.3cm}
+
+El creixement simultani d'habitacions i reserves (Experiment 3) ha produït els temps de planificació més extrems, arribant a prop de 13 hores en el problema més gran. Això suggereix que per problemes de gran escala seria necessari explorar tècniques alternatives com descomposició temporal del problema, heurístiques específiques del domini, o hibridació amb algoritmes de satisfacció de restriccions.
+
+\vspace{0.3cm}
+
+La variabilitat observada entre problemes de mida similar (per exemple, a l'extensió 2 on el Problema 1 va trigar 31 minuts i el Problema 2 només 0.31 segons) indica que la distribució específica de solapaments té un impacte enorme en la dificultat real del problema. Això implica que, en un entorn productiu, seria valuós identificar característiques estructurals dels problemes que prediguin la seva complexitat abans d'intentar resoldre'ls.
+
+\vspace{0.5cm}
+
+\subsection{Sobre les Extensions}
+
+La progressió de complexitat a través de les extensions ha permès observar com l'addició de criteris d'optimització afecta la tractabilitat del problema. L'extensió 2, amb tres dimensions de decisió (capacitat, temps i orientació), ha generat els problemes més complexos en termes absoluts. L'extensió 4, amb efectes condicionals per controlar l'obertura d'habitacions, ha demostrat ser computacionalment exigent però manejable amb paràmetres adequats.
+
+\vspace{0.3cm}
+
+Els efectes condicionals utilitzats a les extensions 2, 3 i 4 són essencials per implementar lògica de comptabilització selectiva, però introdueixen complexitat addicional en el procés de cerca del planificador. Aquesta és una limitació inherent als planificadors basats en cerca cap endavant com FF, que han d'avaluar els efectes condicionals en cada estat explorat.

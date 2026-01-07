@@ -1,0 +1,25 @@
+\section{Introducció}
+
+La planificació automàtica és una disciplina de la intel·ligència artificial que s'ocupa de trobar seqüències d'accions que permetin assolir objectius específics en entorns complexos. En aquest treball, apliquem tècniques de planificació automàtica a un problema real de gestió hotelera: l'assignació òptima de reserves d'allotjament a habitacions disponibles durant un període de 30 dies.
+
+\vspace{0.3cm}
+
+El problema d'assignació de reserves presenta diversos reptes computacionals interessants. Primer, existeixen restriccions dures que han de ser sempre satisfetes: cada habitació té una capacitat màxima de persones, i dues reserves no poden ocupar la mateixa habitació en dates que se solapin. Segon, més enllà d'aquestes restriccions bàsiques, hi ha múltiples criteris d'optimització que poden entrar en conflicte: maximitzar el nombre de reserves servides, respectar les preferències dels clients sobre orientació de les habitacions, minimitzar el desperdici d'espai assignant reserves a habitacions de mida adequada, i minimitzar els costos operatius utilitzant el menor nombre possible d'habitacions diferents.
+
+\vspace{0.3cm}
+
+Per abordar aquest problema, hem desenvolupat una sèrie de models en el llenguatge PDDL (Planning Domain Definition Language) que capturen els diferents aspectes del problema mitjançant predicats, funcions numèriques i operadors. Hem implementat cinc nivells de complexitat creixent:
+
+\vspace{0.3cm}
+
+\begin{itemize}
+    \item \textbf{Nivell Bàsic}: Assignació simple de reserves respectant només capacitat i no solapament temporal.
+    
+    \item \textbf{Extensió 1}: Introducció de la possibilitat de descartar reserves i optimització per maximitzar el nombre de reserves assignades.
+    
+    \item \textbf{Extensió 2}: Incorporació de preferències d'orientació de les habitacions, amb optimització multi-criteri que equilibra maximitzar assignacions i respectar preferències.
+    
+    \item \textbf{Extensió 3}: Minimització del desperdici de places lliures, incentivant assignacions ajustades a la capacitat necessària.
+    
+    \item \textbf{Extensió 4}: Optimització del nombre d'habitacions diferents utilitzades, amb l'objectiu de concentrar reserves i reduir costos operatius.
+\end{itemize}

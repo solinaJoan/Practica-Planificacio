@@ -1,0 +1,98 @@
+
+ff: parsing domain file
+domain 'HOTEL-RESERVES' defined
+ ... done.
+ff: parsing problem file
+problem 'HOTEL-GENERATED-6H-8R' defined
+ ... done.
+
+
+metric established (normalized to minimize): ((1.00*[RF1](PLACES-LLIURES)100.00*[RF0](HABITACIONS-OBERTES)1000.00*[RF2](RESERVES-ASSIGNADES)) - () + 0.00)
+
+task contains conditional effects. turning off state domination.
+
+
+
+checking for cyclic := effects --- OK.
+
+ff: search configuration is  best-first on 1*g(s) + 5*h(s) where
+    metric is ((1.00*[RF1](PLACES-LLIURES)100.00*[RF0](HABITACIONS-OBERTES)1000.00*[RF2](RESERVES-ASSIGNADES)) - () + 0.00)
+
+advancing to distance:    8
+                          7
+                          6
+                          5
+                          4
+                          3
+                          2
+                          1
+                          0
+
+ff: found legal plan as follows
+
+step    0: ASSIGNAR-RESERVA R3 H1
+        1: ASSIGNAR-RESERVA R5 H1
+        2: ASSIGNAR-RESERVA R6 H1
+        3: ASSIGNAR-RESERVA R7 H6
+        4: ASSIGNAR-RESERVA R8 H6
+        5: DESCARTAR-RESERVA R1
+        6: ASSIGNAR-RESERVA R2 H5
+        7: ASSIGNAR-RESERVA R4 H2
+     
+
+time spent:    0.00 seconds instantiating 8 easy, 28 hard action templates
+               0.00 seconds reachability analysis, yielding 364 facts and 36 actions
+               0.00 seconds creating final representation with 312 relevant facts, 3 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+             325.47 seconds searching, evaluating 69005 states, to a max depth of 0
+             325.47 seconds total time
+
+
+ff: parsing domain file
+domain 'HOTEL-RESERVES' defined
+ ... done.
+ff: parsing problem file
+problem 'HOTEL-GENERATED-6H-7R' defined
+ ... done.
+
+
+metric established (normalized to minimize): ((1.00*[RF1](PLACES-LLIURES)100.00*[RF0](HABITACIONS-OBERTES)1000.00*[RF2](RESERVES-ASSIGNADES)) - () + 0.00)
+
+task contains conditional effects. turning off state domination.
+
+
+
+checking for cyclic := effects --- OK.
+
+ff: search configuration is  best-first on 1*g(s) + 5*h(s) where
+    metric is ((1.00*[RF1](PLACES-LLIURES)100.00*[RF0](HABITACIONS-OBERTES)1000.00*[RF2](RESERVES-ASSIGNADES)) - () + 0.00)
+
+advancing to distance:    7
+                          6
+                          5
+                          4
+                          3
+                          2
+                          1
+                          0
+
+ff: found legal plan as follows
+
+step    0: ASSIGNAR-RESERVA R6 H3
+        1: DESCARTAR-RESERVA R2
+        2: ASSIGNAR-RESERVA R4 H3
+        3: ASSIGNAR-RESERVA R5 H4
+        4: DESCARTAR-RESERVA R1
+        5: ASSIGNAR-RESERVA R3 H2
+        6: ASSIGNAR-RESERVA R7 H1
+     
+
+time spent:    0.00 seconds instantiating 7 easy, 18 hard action templates
+               0.00 seconds reachability analysis, yielding 305 facts and 25 actions
+               0.00 seconds creating final representation with 206 relevant facts, 3 relevant fluents
+               0.00 seconds computing LNF
+               0.15 seconds building connectivity graph
+               1.41 seconds searching, evaluating 7094 states, to a max depth of 0
+               1.56 seconds total time
+

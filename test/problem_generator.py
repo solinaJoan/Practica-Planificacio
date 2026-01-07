@@ -175,8 +175,6 @@ class ReservaGenerator:
                         
                 f.write(f"    (= (num-persones {r_name}) {persones})\n")
                 f.write(f"    (pendent {r_name})\n")
-                if self.extensio == 3:
-                    f.write(f"        (prefereix-orientacio {r_name} {orientacio})\n\n")
                 
                 # Dies de la reserva
                 dies_reserva = " ".join([f"(dia-reserva {r_name} d{d})" for d in range(dia_inici, dia_final + 1)])
