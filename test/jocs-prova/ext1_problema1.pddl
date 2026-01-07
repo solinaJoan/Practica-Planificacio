@@ -8,21 +8,20 @@
     ;; Reservas
     r1 r2 r3 r4 r5 r6 - reserva
 
-    ;; Días del mes
-    d1 d2 d3 d4 d5 d6 d7 d8 d9 d10
-    d11 d12 d13 d14 d15 d16 d17 d18 d19 d20 - dia
+    ;; Dies del mes (1 al 30) 
+    d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 d16 d17 d18 d19 d20 d21 d22 d23 d24 d25 d26 d27 d28 d29 d30 - dia
   )
 
   (:init
     ;; Contador de reservas asignadas
     (= (reserves-assignades) 0)
 
-    ;; === HABITACIONES ===
+    ;; === HABITACIONS ===
     (= (capacitat h1) 1)
     (= (capacitat h2) 2)
     (= (capacitat h3) 3)
 
-    ;; === RESERVAS ===
+    ;; === RESERVES ===
 
     ;; r1: 1 persona, días 1-4
     (= (num-persones r1) 1)

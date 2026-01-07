@@ -96,5 +96,7 @@ Aquesta acció s'introdueix a l'extensió 1 i es manté a totes les extensions p
 \begin{enumerate}
     \item \texttt{(not (pendent ?r))}: elimina la reserva de les pendents, permetent complir l'objectiu de l'extensió 1 que requereix que no hi hagi reserves pendents.
     
-    \item \texttt{(increase (reserves-assignades) X)}: incrementa el comptador de reserves no assignades. El valor X és 5 a l'extensió 1 per donar-li més pes en la minimització, i 1 a les extensions 2, 3 i 4 on es combina amb altres criteris.
+    \item \texttt{(increase (reserves-assignades) 1)}: incrementa el comptador de reserves no assignades. 
 \end{enumerate}
+
+

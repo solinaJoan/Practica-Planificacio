@@ -96,8 +96,6 @@ Problema & Nombre Estats & Nombre Fets & Nombre Habitacions & Nombre Reserves & 
 
 Els resultats evidencien un creixement exponencial del temps de planificació. Amb 4 reserves el temps és de 0.16s, però amb 9 reserves arriba a aproximadament 4.5 hores. El problema amb 11 reserves no va trobar solució, va petar la memòria abans d'acabar. 
 
-Com és d'esperar, incrementar el nombre d'habitacions com en l'experiment 1, no és un problema per el planificador, el creixement és lineal en el pitjor cas. Ara bé, incrementar el nombre de reserves, significa fer moltes mes comprovacions per el mateix nombre d'habitacions, moltes més combinacions possibles que tenen un impacte molt més significatiu en la complexitat computacional.
-
 \begin{figure}[h]
 \centering
 \begin{tikzpicture}
@@ -121,7 +119,11 @@ Com és d'esperar, incrementar el nombre d'habitacions com en l'experiment 1, no
 \caption{Evolució del temps de planificació amb creixement de reserves (escala logarítmica)}
 \end{figure}
 
-\subsection{Comparació mètriques experiment 1 i 2}
+\FloatBarrier
+\subsection{Comparació entre els experiments 1 i 2}
+
+Com és d'esperar, incrementar el nombre d'habitacions com en l'experiment 1, no és un problema per el planificador, el creixement és quasi constant, ara bé, incrementar el nombre de reserves, significa fer moltes mes comprovacions per el mateix nombre d'habitacions, moltes més combinacions possibles que tenen un impacte molt més significatiu en la complexitat computacional. A la figura 3 veiem la comparació entre temps d'execució.
+
 % Comparació temps d'execució
 \begin{figure}[h]
 \centering
@@ -132,6 +134,7 @@ Com és d'esperar, incrementar el nombre d'habitacions com en l'experiment 1, no
     legend pos=north west,
     grid=major,
     width=12cm,
+    ymode=log,
     height=7cm
 ]
 % Experiment 1
@@ -148,9 +151,10 @@ Com és d'esperar, incrementar el nombre d'habitacions com en l'experiment 1, no
 \addlegendentry{Experiment 2}
 \end{axis}
 \end{tikzpicture}
-\caption{Comparació del temps d'execució entre Experiment 1 i Experiment 2}
+\caption{Comparació del temps d'execució entre els experiments 1 i 2 (escala logarítmica)}
 \end{figure}
 
+Pel que fa al nombre d'estats, veiem que el creixement és semblant, amb un creixement important al cinquè problema i després un creixement més moderat
 
 % Nombre d'estats
 \begin{figure}[h]
@@ -162,6 +166,7 @@ Com és d'esperar, incrementar el nombre d'habitacions com en l'experiment 1, no
     legend pos=north west,
     grid=major,
     width=12cm,
+    ymode=log,
     height=7cm
 ]
 % Experiment 1 - Estats
@@ -178,9 +183,10 @@ Com és d'esperar, incrementar el nombre d'habitacions com en l'experiment 1, no
 \addlegendentry{Experiment 2}
 \end{axis}
 \end{tikzpicture}
-\caption{Comparació del nombre d'estats entre Experiment 1 i Experiment 2}
+\caption{Comparació del nombre d'estats entre Experiment 1 i Experiment 2 (escala logarítmica)}
 \end{figure}
 
+I finalment, el nombre de fets també té un creixement semblant, tot i que la quantitat acaba sent molt menor al nombre d'estats o temps d'execució
 
 % Nombre de fets
 \begin{figure}[h]
