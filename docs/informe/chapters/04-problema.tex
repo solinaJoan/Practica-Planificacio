@@ -1,0 +1,94 @@
+\section{Problema}
+
+\subsection{Estat Inicial}
+
+L'estat inicial defineix tota la informació coneguda al començament del problema. Bàsicament hem de declarar els objectes del problema (dies, habitacions i reserves) i incialitzar paràmetres
+
+\begin{enumerate}
+    \item \textbf{Capacitat de les habitacions}: mitjançant la funció numèrica \texttt{(= (capacitat ?h) N)}, s'especifica el nombre màxim de persones que pot allotjar cada habitació.
+    
+    \item \textbf{Característiques de les reserves}: per cada reserva es defineix:
+    \begin{itemize}
+        \item \texttt{(= (num-persones ?r) N)}: nombre de persones de la reserva.
+        \item \texttt{(pendent ?r)}: predicat que indica que la reserva està pendent de processar.
+        \item \texttt{(dia-reserva ?r ?d)}: conjunt de predicats que estableixen quins dies ocupa la reserva.
+
+    \item \textbf{Inicialitzar a zero els diversos contadors necessàris per optimitzar la solució}
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\textbf{Elements afegits per extensions:}
+
+
+A l'extensió 2, s'afegeix informació sobre orientacions, tant de les preferides per la reserva com la de les habitacions:
+\begin{itemize}
+    \item \texttt{(te-orientacio ?h ?o)}: indica l'orientació de cada habitació.
+    \item \texttt{(prefereix-orientacio ?r ?o)}: indica la preferència d'orientació de cada reserva.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\subsection{Estat Final (Goal)}
+
+L'objectiu del problema és idèntic en totes les extensions i requereix que totes les reserves hagin estat processades:
+
+\begin{itemize}
+    \item \texttt{(forall (?r - reserva) (not (pendent ?r)))}
+\end{itemize}
+
+Aquest objectiu obliga el planificador a prendre una decisió per cada reserva, ja sigui assignant-la a una habitació (acció \texttt{assignar-reserva}) o descartant-la (acció \texttt{descartar-reserva}, disponible a partir de l'extensió 1). Al nivell bàsic, sense l'acció de descartar, el planificador ha de trobar assignacions vàlides per a totes les reserves o el problema no tindrà solució.
+
+\vspace{0.3cm}
+
+\subsection{Mètrica}
+
+La mètrica defineix el criteri d'optimització que guiarà el planificador cap a la millor solució possible. Cada extensió incorpora nous factors a considerar:
+
+\vspace{0.3cm}
+
+\textbf{Nivell bàsic:} No hi ha mètrica. El planificador només ha de trobar qualsevol pla vàlid que compleixi l'objectiu.
+
+\vspace{0.3cm}
+
+\textbf{Extensió 1:} S'introdueix la primera mètrica per minimitzar les reserves no assignades:
+
+\begin{itemize}
+    \item \texttt{(:metric minimize (reserves-assignades))}
+\end{itemize}
+
+El valor del comptador s'incrementa cada reserva descartada, penalitzant les solucions que no assignen reserves.
+
+\vspace{0.3cm}
+
+\textbf{Extensió 2:} La mètrica combina dos objectius amb pesos diferents:
+
+\begin{itemize}
+    \item \texttt{(:metric minimize (+ (orientacions-incorrectes) (* 100 (reserves-assignades))))}
+\end{itemize}
+
+El pes de 100 sobre les reserves no assignades garanteix que primer es prioritza assignar totes les reserves possibles, i només després s'optimitza la satisfacció de preferències d'orientació. 
+
+\vspace{0.3cm}
+
+\textbf{Extensió 3:} S'afegeix l'objectiu de minimitzar el desperdici de places:
+
+\begin{itemize}
+    \item \texttt{(:metric minimize (+ (places-lliures) (* 100 (reserves-assignades))))}
+\end{itemize}
+
+El comptador \texttt{places-lliures} s'incrementa amb la diferència entre la capacitat de l'habitació i el nombre de persones de cada reserva assignada. El pes de 100 manté la prioritat d'assignar reserves sobre l'eficiència d'ocupació.
+
+\vspace{0.3cm}
+
+\textbf{Extensió 4:} La mètrica final incorpora tres criteris jeràrquics:
+
+\begin{itemize}
+    \item \texttt{(:metric minimize (+ (places-lliures) (+ (* 100 (habitacions-obertes)) (* 1000 (reserves-assignades)))))}
+\end{itemize}
+
+
+Els pesos estableixen una jerarquia de decisió clara: es prioritza assignar reserves, minimitzant el nombre d'habitacions obertes, i finalment l'últim criteri és l'aprofitament de places i ajustar el nombre de persones a la reserva amb la capacitat de l'habitació. Els pesos fan que tot i que haguem d'obrir una habitació nova i penalitzi, sempre surti més rentable que rebutjar una assignació vàlida, o que igualment que tinguem habitacions ajustades per totes les reserves, no les obrim totes. 
+
+Aquesta estructura permet al planificador concentrar les reserves en el menor nombre d'habitacions possible sense sacrificar assignacions.
